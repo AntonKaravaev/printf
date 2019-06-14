@@ -6,7 +6,7 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 17:09:08 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/06/11 21:27:52 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/06/14 19:02:49 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,16 @@ void	ft_putstr(char *str)
 	}
 }
 
+int		ft_strlen(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	return (i);
+}
+
 void	ft_bzero(void *s, size_t size)
 {
 	size_t	i;
@@ -43,7 +53,7 @@ void	ft_bzero(void *s, size_t size)
 	}
 }
 
-char	*ft_strcpy(char *dest, char *src)
+char	*ft_strcpy(char *dest, const char *src)
 {
 	char	*save;
 
@@ -56,32 +66,4 @@ char	*ft_strcpy(char *dest, char *src)
 	}
 	*dest = *src;
 	return (save);
-}
-
-void	ft_strdel(char **as)
-{
-	if (!as || !*as)
-		return ;
-	free(*as);
-	*as = NULL;
-}
-
-char	*ft_strdup(const char *s)
-{
-	char	*str;
-	int	len;
-
-	len = 0;
-	while (s[len] != '\0')
-		len++;
-	if (!(str = (char*)malloc(sizeof(char) * len + 1)))
-		return (NULL);
-	len = 0;
-	while (s[len] != '\0')
-	{
-		str[len] = s[len];
-		len++;
-	}
-	str[len] = '\0';
-	return (str);
 }

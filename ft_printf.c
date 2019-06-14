@@ -6,13 +6,13 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 19:50:48 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/06/11 22:29:02 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/06/14 20:38:00 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		check1(char *str, int i)
+int		checkiftext(char *str, int i)
 {
 	static int	flag;
 
@@ -20,6 +20,7 @@ int		check1(char *str, int i)
 		flag = 0;
 	if (str[i] != '%')
 		return (1);
+
 	else if (flag == 0 && str[i] == '%' && str[i + 1] == '%')
 	{
 		flag = 1;
@@ -30,83 +31,62 @@ int		check1(char *str, int i)
 	return (0);
 }
 
-int     ft_printf(const char *restrict str, ...)
+int		ft_printtext(char *str, va_list *vl, t_ran *ran)
 {
-  /*
-    char  *str;
-    char  *buf;
-    int   i;
-    va_list vl;
-
-    va_start(vl, format);
-    str = (char *)format;
-    i = 0;
-    if (!(buf = (char *)malloc(sizeof(char) * 1001)))
-    return (-1);
-    ft_bzero(buf, 1001);
-    while (str[i] != '\0')
-    {
-    if (str[i] != '%')
-    {
-    buf[i] = str[i];
-    }
-    else
-    {
-    ft_putstr("Attention");
-    return (0);
-    }
-    i++;
-    }
-    ft_putstr(buf);
-    va_end(vl);
-  */
-	int				i;
-	int				j;
-	int				buf_size;
-	char			*buf;
-	char			*bufnew;
-	va_list			vl;
-
-	i = 0;
-	j = 0;
-	buf_size = 101;
-	va_start(vl, str);
-	if (!(buf = (char *)malloc(sizeof(char) * buf_size)))
-		return (-1);
-	ft_bzero(buf, buf_size);
-	while (str[i] != '\0')
+	while (str[(*ran).i] != '\0')
 	{
-		if (check1(((char *)str), i) == 1)
+		if (checkiftext(((char *)str), (*ran).i) == 1)
 		{
-			if (j < buf_size)
-				buf[j] = str[i];
+			if ((*ran).j < (*ran).bs)
+				(*ran).buf[(*ran).j++] = str[(*ran).i++];
 			else
 			{
-				buf_size += 100;
-				if (!(bufnew = (char *)malloc(sizeof(char) * buf_size)))
-					return (-1);
-				ft_bzero(buf, buf_size);
-				bufnew = ft_strcpy(bufnew, buf);
-				ft_strdel(&buf);
-				buf = ft_strdup(bufnew);
-				ft_strdel(&bufnew);
-				buf[j] = str[i];
+				extend_buf(ran);
+				(*ran).buf[(*ran).j++] = str[(*ran).i++];
 			}
-			j++;
 		}
-		i++;
+		else
+		{
+			(*ran).i++;
+			ft_findconver(((char *)str), ran, vl);
+			(*ran).i++;
+		}
 	}
-	printf("Buf checker = %s\n",buf);
+	ft_putstr((*ran).buf);
+	return (1);
+}
+
+int     ft_printf(const char *restrict str, ...)
+{
+	va_list		vl;
+	t_ran 		ran;
+
+	ran.i = 0;
+	ran.j = 0;
+	ran.bs = 101;
+	va_start(vl, str);
+	if (!(ran.buf = (char *)malloc(sizeof(char) * ran.bs)))
+		return (-1);
+	ft_bzero(ran.buf, ran.bs);
+	if (ft_printtext((char *)str, &vl, &ran) != 1)
+		{
+			ft_strdel(&ran.buf);
+			return (-1);
+		}
 	va_end(vl);
-	return (i);
+	return (ft_strlen(ran.buf));
 }
 
 int		main()
 {
-  int i;
-  i = 0;
+	int i;
+	i = 0;
 
-  i = ft_printf("%%hjshgkh%%%%%%dsd");
-  printf("That's how many chars printed = %d\n", i);
-  return (0);
+	i = ft_printf("Hello%d %d\n", 21, 145);
+	// ft_printf("=%d\n", 123456);
+	// ft_printf(" %d \n", -21);
+	printf("m%d\n", i);
+	// printer = printf("Hello%d \n", 21);
+	// printf("p%d\n", printer);
+	return (0);
 }

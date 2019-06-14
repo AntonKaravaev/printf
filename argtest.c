@@ -22,7 +22,8 @@ void var(char *format, ...)
 
 int main(void)
 {
-  var("%d", 255);
-  var("%s", "test string");
+  // var("%", 255);
+  // var("%s", "test string");
+  printf ("%csp\n", 'k');
   return 0;
 }
