@@ -6,36 +6,54 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 19:50:48 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/06/14 20:38:00 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/06/16 01:49:40 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		checkiftext(char *str, int i)
+int		ft_checcon(char *str, int j, t_spec *spec)
 {
-	static int	flag;
+	while (str[j] != '\0' && (str[j] != '%' && str[j] != 'c' && str[j] != 's'
+		&& str[j] != 'p' && str[j] != 'd' && str[j] != 'i' && str[j] != 'o'
+		&& str[j] != 'u' && str[j] != 'x' && str[j] != 'X' && str[j] != 'f'))
+		j++;
+	if (str[j] == '%' || str[j] == 'c' || str[j] == 's' || str[j] == 'p'
+		|| str[j] == 'd' || str[j] == 'i' || str[j] == 'o' || str[j] == 'u'
+		|| str[j] == 'x' || str[j] == 'X' || str[j] == 'f')
+		{
+			(*spec).conver = str[j];
+			return (0);
+		}
+	return (1);
+}
 
-	if (i == 0)
-		flag = 0;
-	if (str[i] != '%')
+int		checkiftext(char *str, int *i, t_spec *spec)
+{
+	int 		j;
+
+	j = *i;
+	//printf("1 %c 1", str[j]);
+	if (str[j] != '%')
 		return (1);
-
-	else if (flag == 0 && str[i] == '%' && str[i + 1] == '%')
+	else if (str[j] == '%')
 	{
-		flag = 1;
-		return (1);
+		j++;
+		if (ft_checcon(str, j, spec) == 1)
+			return(2);
 	}
-	else
-		flag = 0;
 	return (0);
 }
 
-int		ft_printtext(char *str, va_list *vl, t_ran *ran)
+void		ft_printtext(char *str, va_list *vl, t_ran *ran)
 {
+	t_spec spec;
+	ft_newstruct(&spec);
 	while (str[(*ran).i] != '\0')
 	{
-		if (checkiftext(((char *)str), (*ran).i) == 1)
+		if (checkiftext(((char *)str), &(*ran).i, &spec) == 2)
+			return ;
+		else if (checkiftext(((char *)str), &(*ran).i, &spec) == 1)
 		{
 			if ((*ran).j < (*ran).bs)
 				(*ran).buf[(*ran).j++] = str[(*ran).i++];
@@ -48,45 +66,36 @@ int		ft_printtext(char *str, va_list *vl, t_ran *ran)
 		else
 		{
 			(*ran).i++;
-			ft_findconver(((char *)str), ran, vl);
+			ft_recconver(((char *)str), ran, vl, &spec);
 			(*ran).i++;
 		}
 	}
-	ft_putstr((*ran).buf);
-	return (1);
 }
 
 int     ft_printf(const char *restrict str, ...)
 {
 	va_list		vl;
 	t_ran 		ran;
+	int			length;
 
 	ran.i = 0;
 	ran.j = 0;
 	ran.bs = 101;
+	length = 0;
 	va_start(vl, str);
 	if (!(ran.buf = (char *)malloc(sizeof(char) * ran.bs)))
 		return (-1);
 	ft_bzero(ran.buf, ran.bs);
-	if (ft_printtext((char *)str, &vl, &ran) != 1)
-		{
-			ft_strdel(&ran.buf);
-			return (-1);
-		}
+	ft_printtext((char *)str, &vl, &ran);
+	length = ft_strlen(ran.buf);
+	ft_putstr(ran.buf);
+	ft_strdel(&ran.buf);
 	va_end(vl);
-	return (ft_strlen(ran.buf));
+	return (length);
 }
 
 int		main()
 {
-	int i;
-	i = 0;
-
-	i = ft_printf("Hello%d %d\n", 21, 145);
-	// ft_printf("=%d\n", 123456);
-	// ft_printf(" %d \n", -21);
-	printf("m%d\n", i);
-	// printer = printf("Hello%d \n", 21);
-	// printf("p%d\n", printer);
+	ft_printf("%%%% 1\n");
 	return (0);
 }

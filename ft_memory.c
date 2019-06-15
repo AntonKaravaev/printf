@@ -42,3 +42,21 @@ void 	*extend_buf(t_ran *ran)
 	ft_strdel(&bufnew);
 	return ((*ran).buf);
 }
+
+void		ft_newstruct(t_spec *spec)
+{
+	(*spec).space = 0;
+	(*spec).zero = 0;
+	(*spec).minus = 0;
+	(*spec).plus = 0;
+	(*spec).grid = 0;
+	(*spec).pmz = 0;
+	(*spec).width = 0;
+	(*spec).acc = 0;
+	if (!((*spec).buf_width = (char *)malloc(sizeof(char) * 1001)))
+		exit(-1);
+	ft_bzero((*spec).buf_width, 1001);
+	if (!((*spec).buf_acc = (char *)malloc(sizeof(char) * 1001)))
+		exit(-1);
+	ft_bzero((*spec).buf_acc, 1001);
+}
