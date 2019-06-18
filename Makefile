@@ -2,7 +2,7 @@ NAME = libftprintf.a
 
 SRCS = *.c
 
-OBJ = *.o
+OBJ = $(SRCS:.c=.o)
 
 HEADER = ft_printf.h
 
@@ -12,13 +12,15 @@ all: $(NAME)
 
 $(NAME) :
 	@gcc $(FLAGS) -c $(SRCS) -I $(HEADER)
-	@gcc -o printf $(OBJ)
 	@ar rc $(NAME) $(OBJ)
+	@gcc -o printf $(OBJ)
+
 
 clean:
 	@rm -f $(OBJ)
 
 fclean: clean
 	@rm -f $(NAME)
+	@rm -f printf
 
 re: fclean all
