@@ -6,7 +6,7 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/14 11:50:19 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/06/18 00:50:39 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/06/18 23:12:07 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 typedef struct s_spec
 {
 	char	*buf;
+	int		flag; // 1 - h 2 - hh 3 - l 4 -ll
+
 	int		space;
 	int		zero;
 	int		minus;
@@ -27,9 +29,7 @@ typedef struct s_spec
 	int		grid;
 	int 	pmz; // plus = 0, minus = 1 or zero = 2
 	int		width; // #0-+ and space
-	char	*buf_width;
 	int		acc;
-	char	*buf_acc;
 } t_spec;
 
 typedef struct s_ran
@@ -64,11 +64,15 @@ char	*ft_strcpy(char *dest, const char *src);
 char	*ft_strdup(const char *s);
 char	*ft_itoa(int n);
 int		ft_atoi(const char *str);
+void	ft_findpmz(t_spec *spec, int num);
+void	ft_strjcpy(char *dest, char *src, int *j);
+void	ft_easyflag(char *str, t_spec *spec, int j);
 void 	*extend_buf(t_ran *ran);
 void	ft_putchar(char c);
 void	ft_putstr(char *str);
 void	ft_bzero(void *s, size_t size);
 void	ft_strdel(char **as);
+void	ft_reworkbuf(t_spec *spec);
 
 
 #endif

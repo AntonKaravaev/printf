@@ -32,31 +32,39 @@ void 	*extend_buf(t_ran *ran)
 {
 	char *bufnew;
 
-	(*ran).bs += 100;
-	if (!(bufnew = (char *)malloc(sizeof(char) * (*ran).bs)))
+	ran->bs += 100;
+	if (!(bufnew = (char *)malloc(sizeof(char) * ran->bs)))
 		exit(-1);
-	ft_bzero(bufnew, (*ran).bs);
-	bufnew = ft_strcpy(bufnew, (*ran).buf);
-	ft_strdel(&(*ran).buf);
-	(*ran).buf = ft_strdup(bufnew);
+	ft_bzero(bufnew, ran->bs);
+	bufnew = ft_strcpy(bufnew, ran->buf);
+	ft_strdel(&ran->buf);
+	ran->buf = ft_strdup(bufnew);
 	ft_strdel(&bufnew);
-	return ((*ran).buf);
+	return (ran->buf);
+}
+
+void ft_reworkbuf(t_spec *spec)
+{
+	if (spec->buf)
+		ft_strdel(&spec->buf);
+	if (!(spec->buf = (char *)malloc(sizeof(char) * 1001)))
+		exit(-1);
+	ft_bzero(spec->buf, 1001);
 }
 
 void		ft_newstruct(t_spec *spec)
 {
-	(*spec).space = 0;
-	(*spec).zero = 0;
-	(*spec).minus = 0;
-	(*spec).plus = 0;
-	(*spec).grid = 0;
-	(*spec).pmz = 0;
-	(*spec).width = 0;
-	(*spec).acc = 0;
-	if (!((*spec).buf_width = (char *)malloc(sizeof(char) * 1001)))
+	spec->space = 0;
+	spec->flag = 0;
+	spec->zero = 0;
+	spec->minus = 0;
+	spec->plus = 0;
+	spec->grid = 0;
+	spec->pmz = 0;
+	spec->width = 0;
+	spec->acc = 0;
+	if (!(spec->buf = (char *)malloc(sizeof(char) * 1001)))
 		exit(-1);
-	ft_bzero((*spec).buf_width, 1001);
-	if (!((*spec).buf_acc = (char *)malloc(sizeof(char) * 1001)))
-		exit(-1);
-	ft_bzero((*spec).buf_acc, 1001);
+	ft_bzero(spec->buf, 1001);
+	//ft_reworkbuf(spec);
 }
