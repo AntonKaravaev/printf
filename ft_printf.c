@@ -6,7 +6,7 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 19:50:48 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/06/19 00:55:07 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/06/20 01:08:40 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,12 @@
 
 int		ft_checcon(char *str, int j, t_spec *spec, t_ran *ran)
 {
+	ft_easyflag(str, spec, j);
 	while (str[j] != '\0' && str[j] != '%' && str[j] != 'c' && str[j] != 's'
 		&& str[j] != 'p' && str[j] != 'd' && str[j] != 'i' && str[j] != 'o'
 		&& str[j] != 'u' && str[j] != 'x' && str[j] != 'X' && str[j] != 'f'
 		&& str[j] != '\n' && str[j] != '\t' && str[j] != '\v')
-	{
-		ft_easyflag(str, spec, j);
 		j++;
-	}
 	if (str[j] == '\n' || str[j] == '\t' || str[j] == '\v')
 	{
 		ran->i = j;
@@ -30,17 +28,17 @@ int		ft_checcon(char *str, int j, t_spec *spec, t_ran *ran)
 	if (str[j] == '%' || str[j] == 'c' || str[j] == 's' || str[j] == 'p'
 		|| str[j] == 'd' || str[j] == 'i' || str[j] == 'o' || str[j] == 'u'
 		|| str[j] == 'x' || str[j] == 'X' || str[j] == 'f')
-		{
-			ran->conver = str[j];
-			return (0);
-		}
+	{
+		ran->conver = str[j];
+		return (0);
+	}
 	ran->ret = 1;
 	return (0);
 }
 
 int		checkiftext(char *str, t_ran *ran, t_spec *spec)
 {
-	int 		j;
+	int	j;
 
 	j = ran->i;
 	if (str[j] != '%')
@@ -54,12 +52,12 @@ int		checkiftext(char *str, t_ran *ran, t_spec *spec)
 	{
 		j++;
 		if (ft_checcon(str, j, spec, ran) == 1)
-			return(1);
+			return (1);
 	}
 	return (0);
 }
 
-void		ft_start(char *str, va_list *vl, t_ran *ran, t_spec *spec)
+void	ft_start(char *str, va_list *vl, t_ran *ran, t_spec *spec)
 {
 	while (str[ran->i] != '\0')
 	{
@@ -76,7 +74,7 @@ void		ft_start(char *str, va_list *vl, t_ran *ran, t_spec *spec)
 		else
 		{
 			if (ran->ret == 1)
-					return ;
+				return ;
 			ran->i++;
 			ft_recconver(str, ran, vl, spec);
 			ran->i++;
@@ -84,12 +82,12 @@ void		ft_start(char *str, va_list *vl, t_ran *ran, t_spec *spec)
 	}
 }
 
-int     ft_printf(const char *restrict str, ...)
+int		ft_printf(const char *restrict str, ...)
 {
-	va_list		vl;
-	t_ran 		ran;
-	t_spec 		spec;
-	int			length;
+	va_list	vl;
+	t_ran	ran;
+	t_spec	spec;
+	int		length;
 
 	ran.i = 0;
 	ran.j = 0;
@@ -109,13 +107,13 @@ int     ft_printf(const char *restrict str, ...)
 	return (length);
 }
 
-int		main()
-{
-
-	ft_printf("%   10X\n", 42);
-
-// 	//printf("%X\n", 4294967296);
-
-
-	return (0);
-}
+// int		main()
+// {
+//
+// 	ft_printf("%X", 42);
+//
+// // 	//printf("%X\n", 4294967296);
+//
+//
+// 	return (0);
+// }

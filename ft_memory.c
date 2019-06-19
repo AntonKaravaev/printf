@@ -66,5 +66,4 @@ void		ft_newstruct(t_spec *spec)
 	if (!(spec->buf = (char *)malloc(sizeof(char) * 1001)))
 		exit(-1);
 	ft_bzero(spec->buf, 1001);
-	//ft_reworkbuf(spec);
 }

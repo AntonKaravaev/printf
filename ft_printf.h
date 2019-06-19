@@ -6,7 +6,7 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/14 11:50:19 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/06/18 23:12:07 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/06/20 01:03:07 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ typedef struct s_spec
 {
 	char	*buf;
 	int		flag; // 1 - h 2 - hh 3 - l 4 -ll
-
 	int		space;
 	int		zero;
 	int		minus;
@@ -57,8 +56,8 @@ void	ft_findpmz(t_spec *spec, int num);
 void	ft_i_record(char *str, t_ran *ran, va_list *vl, t_spec *spec);
 void	ft_o_record(char *str, t_ran *ran, va_list *vl, t_spec *spec);
 void	ft_u_record(char *str, t_ran *ran, va_list *vl, t_spec *spec);
-void	ft_x_record(char *str, t_ran *ran, va_list *vl, t_spec *spec);
-void	ft_X_record(char *str, t_ran *ran, va_list *vl, t_spec *spec);
+void	ft_x_record(t_ran *ran, va_list *vl, t_spec *spec);
+void	ft_X_record(t_ran *ran, va_list *vl, t_spec *spec);
 void	ft_f_record(char *str, t_ran *ran, va_list *vl, t_spec *spec);
 char	*ft_strcpy(char *dest, const char *src);
 char	*ft_strdup(const char *s);
@@ -74,5 +73,15 @@ void	ft_bzero(void *s, size_t size);
 void	ft_strdel(char **as);
 void	ft_reworkbuf(t_spec *spec);
 
+
+void	ft_ui(t_spec *spec, t_ran *ran, unsigned long long int num, int sm);
+void	ft_usi(t_spec *spec, t_ran *ran, unsigned long long int num, int sm);
+void	ft_ucc(t_spec *spec, t_ran *ran, unsigned long long int num, int sm);
+void	ft_uli(t_spec *spec, t_ran *ran, unsigned long long int num, int sm);
+void	ft_ulli(t_spec *spec, t_ran *ran, unsigned long long int num, int sm);
+void	ft_bufjoin_x(t_ran *ran, t_spec *spec);
+void	ft_print1(t_ran *ran, t_spec *spec);
+void	ft_print2(t_ran *ran, t_spec *spec);
+void	ft_print3(t_ran *ran, t_spec *spec);
 
 #endif

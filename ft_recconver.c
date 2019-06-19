@@ -6,7 +6,7 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/14 12:00:40 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/06/19 00:54:23 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/06/20 01:07:16 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,21 @@ void	ft_flag(char *str, t_ran *ran, t_spec *spec)
 {
 	while (str[ran->i] != ran->conver)
 	{
-		if (str[ran->i++] == 'h')
+		if (str[ran->i] == 'h')
 		{
+			ran->i++;
 			spec->flag = 1;
-			if (str[ran->i++] == 'h')
+			if (str[ran->i] == 'h')
 			{
 				spec->flag = 2;
 			}
 			return ;
 		}
-		if (str[ran->i++] == 'l')
+		if (str[ran->i] == 'l')
 		{
+			ran->i++;
 			spec->flag = 3;
-			if (str[ran->i++] == 'l')
+			if (str[ran->i] == 'l')
 			{
 				spec->flag = 4;
 			}
@@ -114,12 +116,12 @@ void	ft_recconver(char *str, t_ran *ran, va_list *vl, t_spec *spec)
 	if (ran->conver == 'x')
 	{
 		ft_whilenotconver(str, ran, spec);
-		ft_x_record(str, ran, vl, spec);
+		ft_x_record(ran, vl, spec);
 	}
 	if (ran->conver == 'X')
 	{
 		ft_whilenotconver(str, ran, spec);
-		ft_X_record(str, ran, vl, spec);
+		ft_X_record(ran, vl, spec);
 	}
 
 	// if (ran->conver == 'f')

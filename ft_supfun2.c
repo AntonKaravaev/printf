@@ -21,14 +21,25 @@ void	ft_strjcpy(char *dest, char *src, int *j)
 
 void ft_easyflag(char *str, t_spec *spec, int j)
 {
-	if (str[j] == '-')
-		spec->minus = 1;
-	if (str[j] == '+')
-		spec->plus = 1;
-	if (str[j] == '0')
-		spec->plus = 1;
-	if (str[j] == '#')
-		spec->plus = 1;
+
+	while (str[j] != '\0' && str[j] != '%' && str[j] != 'c' && str[j] != 's'
+		&& str[j] != 'p' && str[j] != 'd' && str[j] != 'i' && str[j] != 'o'
+		&& str[j] != 'u' && str[j] != 'x' && str[j] != 'X' && str[j] != 'f'
+		&& str[j] != '\n' && str[j] != '\t' && str[j] != '\v'
+		&& (str[j] < '1' || str[j] > '9'))
+	{
+		if (str[j] == '-')
+			spec->minus = 1;
+		if (str[j] == '+')
+			spec->plus = 1;
+		if (str[j] == '0')
+			spec->zero = 1;
+		if (str[j] == '#')
+			spec->grid = 1;
+		if (str[j] == ' ')
+			spec->space = 1;
+		j++;
+	}
 }
 
 void	ft_procwidth(char *str, t_ran *ran, t_spec *spec)
