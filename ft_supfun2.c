@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_supfun2.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/06/20 21:27:32 by crenly-b          #+#    #+#             */
+/*   Updated: 2019/06/20 22:04:46 by crenly-b         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-void		ft_findpmz(t_spec *spec, int num)
+void	ft_findpmz(t_spec *spec, int num)
 {
 	spec->pmz = 0;
 	if (num < 0)
@@ -19,7 +31,7 @@ void	ft_strjcpy(char *dest, char *src, int *j)
 	dest[(*j)] = '\0';
 }
 
-void ft_easyflag(char *str, t_spec *spec, int j)
+void	ft_easyflag(char *str, t_spec *spec, int j)
 {
 	while (str[j] != '\0' && str[j] != '%' && str[j] != 'c' && str[j] != 's'
 		&& str[j] != 'p' && str[j] != 'd' && str[j] != 'i' && str[j] != 'o'
@@ -39,6 +51,9 @@ void ft_easyflag(char *str, t_spec *spec, int j)
 			spec->space = 1;
 		j++;
 	}
+	if (spec->minus == 0 && spec->plus == 0 && spec->zero == 0 &&
+		spec->grid == 0 && spec->space == 0)
+		spec->allflagzero = 1;
 }
 
 void	ft_procwidth(char *str, t_ran *ran, t_spec *spec)
@@ -57,7 +72,7 @@ void	ft_procwidth(char *str, t_ran *ran, t_spec *spec)
 			if (str[ran->i] == ran->conver)
 			{
 				spec->width = ft_atoi(spec->buf);
-				return;
+				return ;
 			}
 			else
 			{
@@ -65,6 +80,6 @@ void	ft_procwidth(char *str, t_ran *ran, t_spec *spec)
 				ran->i--;
 			}
 		}
-	ran->i++;
+		ran->i++;
 	}
 }

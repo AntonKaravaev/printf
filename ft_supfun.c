@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_supfun.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/06/20 21:28:26 by crenly-b          #+#    #+#             */
+/*   Updated: 2019/06/20 22:04:47 by crenly-b         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 void	ft_putchar(char c)
@@ -7,7 +19,7 @@ void	ft_putchar(char c)
 
 void	ft_putstr(char *str)
 {
- 	int	i;
+	int	i;
 
 	i = 0;
 	while (str[i] != '\0')
@@ -34,7 +46,7 @@ void	ft_bzero(void *s, size_t size)
 
 	str = (char *)s;
 	i = 0;
-	while (i  < size)
+	while (i < size)
 	{
 		str[i] = '\0';
 		i++;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memory.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/06/20 21:29:58 by crenly-b          #+#    #+#             */
+/*   Updated: 2019/06/20 22:04:55 by crenly-b         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 void	ft_strdel(char **as)
@@ -11,7 +23,7 @@ void	ft_strdel(char **as)
 char	*ft_strdup(const char *s)
 {
 	char	*str;
-	int	len;
+	int		len;
 
 	len = 0;
 	while (s[len] != '\0')
@@ -28,7 +40,7 @@ char	*ft_strdup(const char *s)
 	return (str);
 }
 
-void 	*extend_buf(t_ran *ran)
+void	*extend_buf(t_ran *ran)
 {
 	char *bufnew;
 
@@ -43,7 +55,7 @@ void 	*extend_buf(t_ran *ran)
 	return (ran->buf);
 }
 
-void ft_reworkbuf(t_spec *spec)
+void	ft_reworkbuf(t_spec *spec)
 {
 	if (spec->buf)
 		ft_strdel(&spec->buf);
@@ -52,7 +64,7 @@ void ft_reworkbuf(t_spec *spec)
 	ft_bzero(spec->buf, 1001);
 }
 
-void		ft_newstruct(t_spec *spec)
+void	ft_newstruct(t_spec *spec)
 {
 	spec->i = 0;
 	spec->j = 0;

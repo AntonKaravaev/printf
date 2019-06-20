@@ -6,7 +6,7 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/14 11:50:19 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/06/20 16:03:54 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/06/20 23:12:14 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,8 @@ void	ft_bufjoin_x(t_ran *ran, t_spec *spec);
 void	ft_print1(t_ran *ran, t_spec *spec);
 void	ft_print2(t_ran *ran, t_spec *spec);
 void	ft_print3(t_ran *ran, t_spec *spec);
+void	ft_print4(t_ran *ran, t_spec *spec);
+
+void	ft_checkgrid(t_ran *ran, t_spec *spec);
 
 #endif
