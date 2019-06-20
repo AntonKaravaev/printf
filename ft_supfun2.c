@@ -21,7 +21,6 @@ void	ft_strjcpy(char *dest, char *src, int *j)
 
 void ft_easyflag(char *str, t_spec *spec, int j)
 {
-
 	while (str[j] != '\0' && str[j] != '%' && str[j] != 'c' && str[j] != 's'
 		&& str[j] != 'p' && str[j] != 'd' && str[j] != 'i' && str[j] != 'o'
 		&& str[j] != 'u' && str[j] != 'x' && str[j] != 'X' && str[j] != 'f'

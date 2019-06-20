@@ -6,7 +6,7 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/14 11:50:19 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/06/20 01:03:07 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/06/20 16:03:54 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@ typedef struct s_spec
 	int 	pmz; // plus = 0, minus = 1 or zero = 2
 	int		width; // #0-+ and space
 	int		acc;
+	int		allflagzero; //  #0-+ and space если все из этого не нашлось
+	int		i;
+	int		j;
+	int		z; // use for void	ft_acc(char *str, t_ran *ran, t_spec *spec) Problems with norm;
 } t_spec;
 
 typedef struct s_ran

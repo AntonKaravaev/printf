@@ -54,6 +54,9 @@ void ft_reworkbuf(t_spec *spec)
 
 void		ft_newstruct(t_spec *spec)
 {
+	spec->i = 0;
+	spec->j = 0;
+	spec->z = 0;
 	spec->space = 0;
 	spec->flag = 0;
 	spec->zero = 0;
@@ -63,6 +66,7 @@ void		ft_newstruct(t_spec *spec)
 	spec->pmz = 0;
 	spec->width = 0;
 	spec->acc = 0;
+	spec->allflagzero = 0;
 	if (!(spec->buf = (char *)malloc(sizeof(char) * 1001)))
 		exit(-1);
 	ft_bzero(spec->buf, 1001);

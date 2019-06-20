@@ -1,11 +1,139 @@
 #include "ft_printf.h"
 
+void	ft_print4(t_ran *ran, t_spec *spec)
+{
+	int i;
+	if (spec->acc == -1)
+		spec->buf[0] = ' ';
+	if (spec->width >= spec->acc)
+	{
+		if (spec->zero == 0)
+		{
+			if ((spec->grid == 1 && ran->conver == 'x' && spec->buf[0] != '0')
+				|| (spec->grid == 1 && ran->conver == 'X' && spec->buf[0] != '0'))
+				i = ft_strlen(spec->buf) + 2;
+			else
+				i = ft_strlen(spec->buf);
+			while (i < spec->width && spec->minus == 0)
+			{
+				ran->buf[ran->j++] = ' ';
+				i++;
+			}
+			if (spec->grid == 1 && ran->conver == 'x' && spec->buf[0] != '0')
+			{
+				ran->buf[ran->j++] = '0';
+				ran->buf[ran->j++] = 'x';
+			}
+			else if (spec->grid == 1 && ran->conver == 'X' && spec->buf[0] != '0')
+			{
+				ran->buf[ran->j++] = '0';
+				ran->buf[ran->j++] = 'X';
+			}
+			if (ft_strlen(spec->buf) + ran->j < ran->bs && spec->minus == 0)
+				ft_strjcpy(ran->buf, spec->buf, &ran->j);
+			else if (spec->minus == 0)
+			{
+				extend_buf(ran);
+				ft_strjcpy(ran->buf, spec->buf, &ran->j);
+			}
+			if (spec->minus == 1)
+			{
+				if(ft_strlen(spec->buf) + ran->j < ran->bs )
+						ft_strjcpy(ran->buf, spec->buf, &ran->j);
+				else
+				{
+					extend_buf(ran);
+					ft_strjcpy(ran->buf, spec->buf, &ran->j);
+				}
+				while (i < spec->width)
+				{
+					ran->buf[ran->j++] = ' ';
+					i++;
+				}
+			}
+		}
+		else
+		{
+			if (spec->minus == 0)
+			{
+				if (spec->grid == 1 && ran->conver == 'x' && spec->buf[0] != '0')
+				{
+					ran->buf[ran->j++] = '0';
+					ran->buf[ran->j++] = 'x';
+					i = ft_strlen(spec->buf) + 2;
+				}
+				else if (spec->grid == 1 && ran->conver == 'X' && spec->buf[0] != '0')
+				{
+					ran->buf[ran->j++] = '0';
+					ran->buf[ran->j++] = 'X';
+					i = ft_strlen(spec->buf) + 2;
+				}
+				else
+					i = ft_strlen(spec->buf);
+				while (i < spec->width && spec->minus == 0)
+				{
+
+					ran->buf[ran->j++] = '0';
+					i++;
+				}
+				if (ft_strlen(spec->buf) + ran->j < ran->bs && spec->minus == 0)
+					ft_strjcpy(ran->buf, spec->buf, &ran->j);
+				else
+				{
+					extend_buf(ran);
+					ft_strjcpy(ran->buf, spec->buf, &ran->j);
+				}
+			}
+			else
+			{
+				if (spec->grid == 1 && ran->conver == 'x' && spec->buf[0] != '0')
+				{
+					ran->buf[ran->j++] = '0';
+					ran->buf[ran->j++] = 'x';
+					i = ft_strlen(spec->buf) + 2;
+				}
+				else if (spec->grid == 1 && ran->conver == 'X' && spec->buf[0] != '0')
+				{
+					ran->buf[ran->j++] = '0';
+					ran->buf[ran->j++] = 'X';
+					i = ft_strlen(spec->buf) + 2;
+				}
+				else
+					i = ft_strlen(spec->buf);
+				if(ft_strlen(spec->buf) + ran->j < ran->bs )
+						ft_strjcpy(ran->buf, spec->buf, &ran->j);
+				else
+				{
+					extend_buf(ran);
+					ft_strjcpy(ran->buf, spec->buf, &ran->j);
+				}
+				while (i < spec->width)
+				{
+					ran->buf[ran->j++] = ' ';
+					i++;
+				}
+			}
+		}
+	}
+	if (spec->width < spec->acc)
+	{
+		if (spec->allflagzero == 1)
+		{
+
+		}
+	}
+}
+
 void ft_print3(t_ran *ran, t_spec *spec)
 {
+
 	int i;
 
 	i = ft_strlen(spec->buf);
-	while (i < spec->width && spec->minus == 0)
+
+	if (spec->acc == -1)
+		return ;
+	while (i < spec->acc && spec->minus == 0)
 	{
 		ran->buf[ran->j++] = '0';
 		i++;
@@ -39,39 +167,128 @@ void ft_print2(t_ran *ran, t_spec *spec)
 {
 	int i;
 
-	i = ft_strlen(spec->buf);
-	while (i < spec->width && spec->minus == 0)
+	if (spec->zero == 0)
 	{
-		ran->buf[ran->j++] = ' ';
-		i++;
-	}
-	if (ft_strlen(spec->buf) + ran->j < ran->bs && spec->minus == 0)
-		ft_strjcpy(ran->buf, spec->buf, &ran->j);
-	else if (spec->minus == 0)
-	{
-		extend_buf(ran);
-		ft_strjcpy(ran->buf, spec->buf, &ran->j);
-	}
-
-	if (spec->minus == 1)
-	{
-		if(ft_strlen(spec->buf) + ran->j < ran->bs )
-				ft_strjcpy(ran->buf, spec->buf, &ran->j);
+		if ((spec->grid == 1 && ran->conver == 'x' && spec->buf[0] != '0')
+			|| (spec->grid == 1 && ran->conver == 'X' && spec->buf[0] != '0'))
+			i = ft_strlen(spec->buf) + 2;
 		else
-		{
-			extend_buf(ran);
-			ft_strjcpy(ran->buf, spec->buf, &ran->j);
-		}
-		while (i < spec->width)
+			i = ft_strlen(spec->buf);
+		while (i < spec->width && spec->minus == 0)
 		{
 			ran->buf[ran->j++] = ' ';
 			i++;
 		}
+		if (spec->grid == 1 && ran->conver == 'x' && spec->buf[0] != '0')
+		{
+			ran->buf[ran->j++] = '0';
+			ran->buf[ran->j++] = 'x';
+		}
+		else if (spec->grid == 1 && ran->conver == 'X' && spec->buf[0] != '0')
+		{
+			ran->buf[ran->j++] = '0';
+			ran->buf[ran->j++] = 'X';
+		}
+		if (ft_strlen(spec->buf) + ran->j < ran->bs && spec->minus == 0)
+			ft_strjcpy(ran->buf, spec->buf, &ran->j);
+		else if (spec->minus == 0)
+		{
+			extend_buf(ran);
+			ft_strjcpy(ran->buf, spec->buf, &ran->j);
+		}
+		if (spec->minus == 1)
+		{
+			if(ft_strlen(spec->buf) + ran->j < ran->bs )
+					ft_strjcpy(ran->buf, spec->buf, &ran->j);
+			else
+			{
+				extend_buf(ran);
+				ft_strjcpy(ran->buf, spec->buf, &ran->j);
+			}
+			while (i < spec->width)
+			{
+				ran->buf[ran->j++] = ' ';
+				i++;
+			}
+		}
+	}
+	else
+	{
+		if (spec->minus == 0)
+		{
+			if (spec->grid == 1 && ran->conver == 'x' && spec->buf[0] != '0')
+			{
+				ran->buf[ran->j++] = '0';
+				ran->buf[ran->j++] = 'x';
+				i = ft_strlen(spec->buf) + 2;
+			}
+			else if (spec->grid == 1 && ran->conver == 'X' && spec->buf[0] != '0')
+			{
+				ran->buf[ran->j++] = '0';
+				ran->buf[ran->j++] = 'X';
+				i = ft_strlen(spec->buf) + 2;
+			}
+			else
+				i = ft_strlen(spec->buf);
+			while (i < spec->width && spec->minus == 0)
+			{
+
+				ran->buf[ran->j++] = '0';
+				i++;
+			}
+			if (ft_strlen(spec->buf) + ran->j < ran->bs && spec->minus == 0)
+				ft_strjcpy(ran->buf, spec->buf, &ran->j);
+			else
+			{
+				extend_buf(ran);
+				ft_strjcpy(ran->buf, spec->buf, &ran->j);
+			}
+		}
+		else
+		{
+			if (spec->grid == 1 && ran->conver == 'x' && spec->buf[0] != '0')
+			{
+				ran->buf[ran->j++] = '0';
+				ran->buf[ran->j++] = 'x';
+				i = ft_strlen(spec->buf) + 2;
+			}
+			else if (spec->grid == 1 && ran->conver == 'X' && spec->buf[0] != '0')
+			{
+				ran->buf[ran->j++] = '0';
+				ran->buf[ran->j++] = 'X';
+				i = ft_strlen(spec->buf) + 2;
+			}
+			else
+				i = ft_strlen(spec->buf);
+			if(ft_strlen(spec->buf) + ran->j < ran->bs )
+					ft_strjcpy(ran->buf, spec->buf, &ran->j);
+			else
+			{
+				extend_buf(ran);
+				ft_strjcpy(ran->buf, spec->buf, &ran->j);
+			}
+			while (i < spec->width)
+			{
+				ran->buf[ran->j++] = ' ';
+				i++;
+			}
+		}
+
 	}
 }
 
 void	ft_print1(t_ran *ran, t_spec *spec)
 {
+	if (spec->grid == 1 && ran->conver == 'x' && spec->buf[0] != '0')
+	{
+		ran->buf[ran->j++] = '0';
+		ran->buf[ran->j++] = 'x';
+	}
+	else if (spec->grid == 1 && ran->conver == 'X' && spec->buf[0] != '0')
+	{
+		ran->buf[ran->j++] = '0';
+		ran->buf[ran->j++] = 'X';
+	}
 	if (ft_strlen(spec->buf) + ran->j < ran->bs )
 		ft_strjcpy(ran->buf, spec->buf, &ran->j);
 	else
@@ -85,10 +302,12 @@ void	ft_bufjoin_x(t_ran *ran, t_spec *spec)
 {
 	if (spec->width == 0 && spec->acc == 0)
 		ft_print1(ran, spec);
-	if (spec->width != 0 && spec->acc == 0 && spec->zero == 0)
+	if (spec->width != 0 && spec->acc == 0)
 		ft_print2(ran, spec);
-	if (spec->width != 0 && spec->acc == 0 && spec->zero == 1)
+	if (spec->width == 0 && spec->acc != 0)
 		ft_print3(ran, spec);
+	if (spec->width != 0 && spec->acc != 0)
+		ft_print4(ran, spec);
 }
 
 void	ft_x_record(t_ran *ran, va_list *vl, t_spec *spec)

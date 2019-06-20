@@ -6,7 +6,7 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/14 12:00:40 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/06/20 01:07:16 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/06/20 15:20:35 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,24 +42,27 @@ void	ft_flag(char *str, t_ran *ran, t_spec *spec)
 
 void	ft_acc(char *str, t_ran *ran, t_spec *spec)
 {
-	int z;
-
 	while (str[ran->i] != ran->conver && str[ran->i] != 'h'
 		&& str[ran->i] != 'l')
 	{
 		if (str[ran->i] == '.')
 		{
+			ran->i++;
 			if (str[ran->i] >= '1' && str[ran->i] <= '9')
 			{
-				z = 0;
-				(*spec).buf[z++] = str[ran->i++];
+				spec->buf[spec->z++] = str[ran->i++];
 				while (str[ran->i] >= '0' && str[ran->i] <= '9')
-					spec->buf[z++] = str[ran->i++];
+					spec->buf[spec->z++] = str[ran->i++];
 				spec->acc = ft_atoi(spec->buf);
-					return;
+				return ;
+			}
+			else
+			{
+				spec->acc = -1;
+				return ;
 			}
 		}
-	ran->i++;
+		ran->i++;
 	}
 }
 
@@ -77,7 +80,7 @@ void	ft_width(char *str, t_ran *ran, t_spec *spec)
 			while (str[ran->i] >= '0' && str[ran->i] <= '9')
 				spec->buf[z++] = str[ran->i++];
 			spec->width = ft_atoi(spec->buf);
-				return;
+			return ;
 		}
 		ran->i++;
 	}
@@ -93,7 +96,6 @@ void	ft_whilenotconver(char *str, t_ran *ran, t_spec *spec)
 	while (str[ran->i] != ran->conver)
 		ran->i++;
 }
-
 
 void	ft_recconver(char *str, t_ran *ran, va_list *vl, t_spec *spec)
 {
