@@ -48,12 +48,6 @@ void	ft_bufjoin_d(char *str, t_ran *ran, t_spec *spec, int num)
 			ft_strjcpy(ran->buf, spec->buf, &ran->j);
 			ft_strdel(&spec->buf);
 		}
-		else
-		{
-			extend_buf(ran);
-			ft_strjcpy(ran->buf, spec->buf, &ran->j);
-			ft_strdel(&spec->buf);
-		}
 	}
 }
 

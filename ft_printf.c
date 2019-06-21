@@ -6,7 +6,7 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 19:50:48 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/06/21 02:09:53 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/06/21 18:41:23 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,6 @@ void	ft_start(char *str, va_list *vl, t_ran *ran, t_spec *spec)
 		{
 			if (ran->j < ran->bs)
 				ran->buf[ran->j++] = str[ran->i++];
-			else
-			{
-				extend_buf(ran);
-				ran->buf[ran->j++] = str[ran->i++];
-			}
 		}
 		else
 		{
@@ -110,7 +105,7 @@ int		ft_printf(const char *restrict str, ...)
 // int		main()
 // {
 //
-// 	ft_printf("%#.5x", 21);
+// 	ft_printf("%-8.3x\n", 8375);
 //
 // // 	//printf("%X\n", 4294967296);
 //

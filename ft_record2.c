@@ -11,74 +11,152 @@ void	ft_print4(t_ran *ran, t_spec *spec)
 {
 	if (spec->minus == 1 && spec->buf[0] == '0' && spec->acc != -1) // doesnt matter spec->zero == 0 or 1
 	{
-		while (spec->acc != ran->j)
+		while (spec->acc != spec->i)
+		{
 			ran->buf[ran->j++] = '0';
-		while (ran->j < spec->width)
+			spec->i++;
+		}
+
+		while (spec->i < spec->width)
+		{
 			ran->buf[ran->j++] = ' ';
+			spec->i++;
+		}
 		return ;
 	}
 	if (spec->minus == 0 && spec->buf[0] == '0' && spec->acc != -1) // doesnt matter spec->zero == 0 or 1
 	{
-		while (spec->width - spec->acc > ran->j)
+		while (spec->width - spec->acc > spec->i)
+		{
 			ran->buf[ran->j++] = ' ';
-		while (ran->j < spec->width)
+			spec->i++;
+		}
+		while (spec->i < spec->width)
+		{
 			ran->buf[ran->j++] = '0';
+			spec->i++;
+		}
 		return ;
 	}
 	if (spec->acc == -1 && spec->buf[0] == '0') // doesnt matter spec->zero == 0 or 1
 	{
-		while (ran->j < spec->width)
-			ran->buf[ran->j++] = ' ';
+		while (spec->i < spec->width)
+		{
+				ran->buf[ran->j++] = ' ';
+				spec->i++;
+		}
 		return ;
 	}
 	if (spec->allflagzero == 1) // doesnt matter spec->zero == 0 or 1
 	{
 		if (spec->width >= spec->acc)
 		{
-			while (ran->j < spec->width - ft_biggeraccornum(spec))
+			while (spec->i < spec->width - ft_biggeraccornum(spec))
+			{
 				ran->buf[ran->j++] = ' ';
-			while (ran->j < spec->width - ft_strlen(spec->buf))
+				spec->i++;
+			}
+			while (spec->i < spec->width - ft_strlen(spec->buf))
+			{
 				ran->buf[ran->j++] = '0';
+				spec->i++;
+			}
 			ft_strjcpy(ran->buf, spec->buf, &ran->j);
 			return ;
 		}
 		else
 		{
-			while (ran->j < spec->acc - ft_strlen(spec->buf))
+			while (spec->i < spec->acc - ft_strlen(spec->buf))
+			{
 				ran->buf[ran->j++] = '0';
+				spec->i++;
+			}
 			ft_strjcpy(ran->buf, spec->buf, &ran->j);
 			return ;
 		}
 	}
-
 	if (spec->minus == 1 && spec->buf[0] != '0') // doesnt matter spec->zero == 0 or 1
 	{
 		if (spec->width >= spec->acc)
 		{
+			if (spec->grid == 1)
+			{
+				ft_checkgrid(ran, spec);
+				spec->i += 2;
+				while (spec->i < spec->acc - ft_strlen(spec->buf) + 2)
+				{
+					ran->buf[ran->j++] = '0';
+					spec->i++;
+				}
+				ft_strjcpy(ran->buf, spec->buf, &ran->j);
+				spec->i += ft_strlen(spec->buf);
+				while (spec->i < spec->width)
+				{
+					ran->buf[ran->j++] = ' ';
+					spec->i++;
+				}
+				return ;
+			}
 			if (spec->acc < ft_strlen(spec->buf))
 			{
 				ft_strjcpy(ran->buf, spec->buf, &ran->j);
-				while (ran->j < spec->width)
+				spec->i += ft_strlen(spec->buf);
+				while (spec->i < spec->width)
+				{
 					ran->buf[ran->j++] = ' ';
+					spec->i++;
+				}
 				return ;
 			}
-			while (ran->j < spec->width - ft_biggeraccornum(spec))
+			while (spec->i < spec->width - ft_biggeraccornum(spec))
+			{
 				ran->buf[ran->j++] = '0';
+				spec->i++;
+			}
 			ft_strjcpy(ran->buf, spec->buf, &ran->j);
-			while (ran->j < spec->width)
+			spec->i += ft_strlen(spec->buf);
+			while (spec->i < spec->width)
+			{
 				ran->buf[ran->j++] = ' ';
+				spec->i++;
+			}
 			return ;
 		}
 		else
 		{
+			if (spec->grid == 1)
+			{
+				ft_checkgrid(ran, spec);
+				spec->i += 2;
+				while (spec->i < spec->acc - ft_strlen(spec->buf) + 2)
+				{
+					ran->buf[ran->j++] = '0';
+					spec->i++;
+				}
+				ft_strjcpy(ran->buf, spec->buf, &ran->j);
+				spec->i += ft_strlen(spec->buf);
+				while (spec->i < spec->width)
+				{
+					ran->buf[ran->j++] = ' ';
+					spec->i++;
+				}
+				return ;
+			}
 			if (spec->acc >= ft_strlen(spec->buf))
 			{
-				while (ran->j < spec->acc - ft_strlen(spec->buf))
+				while (spec->i < spec->acc - ft_strlen(spec->buf))
+				{
 					ran->buf[ran->j++] = '0';
+					spec->i++;
+				}
 			}
 			ft_strjcpy(ran->buf, spec->buf, &ran->j);
-			while (ran->j < spec->acc - ft_strlen(spec->buf))
+			spec->i += ft_strlen(spec->buf);
+			while (spec->i < spec->acc - ft_strlen(spec->buf))
+			{
 				ran->buf[ran->j++] = '0';
+				spec->i++;
+			}
 			return ;
 		}
 	}
@@ -86,23 +164,64 @@ void	ft_print4(t_ran *ran, t_spec *spec)
 	{
 		if (spec->width >= spec->acc)
 		{
+			if (spec->grid == 1)
+			{
+				while (spec->i < spec->width - ft_biggeraccornum(spec) - 2)
+				{
+					ran->buf[ran->j++] = ' ';
+					spec->i++;
+				}
+				ft_checkgrid(ran, spec);
+				spec->i += 2;
+				while (spec->i < spec->width - ft_strlen(spec->buf))
+				{
+					ran->buf[ran->j++] = '0';
+					spec->i++;
+				}
+				ft_strjcpy(ran->buf, spec->buf, &ran->j);
+				return ;
+			}
 			while (ran->j < spec->width - ft_biggeraccornum(spec))
+			{
 				ran->buf[ran->j++] = ' ';
-			while (ran->j < spec->width - ft_strlen(spec->buf))
+				spec->i++;
+			}
+			while (spec->i < spec->width - ft_strlen(spec->buf))
+			{
 				ran->buf[ran->j++] = '0';
+				spec->i++;
+			}
 			ft_strjcpy(ran->buf, spec->buf, &ran->j);
 			return ;
 		}
 		else
 		{
+			if (spec->grid == 1)
+			{
+				ft_checkgrid(ran, spec);
+				while (spec->i < spec->acc - ft_strlen(spec->buf))
+				{
+					ran->buf[ran->j++] = '0';
+					spec->i++;
+				}
+				ft_strjcpy(ran->buf, spec->buf, &ran->j);
+				return ;
+			}
 			if (spec->acc >= ft_strlen(spec->buf))
 			{
-				while (ran->j < spec->acc - ft_strlen(spec->buf))
+				while (spec->i < spec->acc - ft_strlen(spec->buf))
+				{
 					ran->buf[ran->j++] = '0';
+					spec->i++;
+				}
 			}
 			ft_strjcpy(ran->buf, spec->buf, &ran->j);
-			while (ran->j < spec->acc - ft_strlen(spec->buf))
+			spec->i += ft_strlen(spec->buf);
+			while (spec->i < spec->acc - ft_strlen(spec->buf))
+			{
 				ran->buf[ran->j++] = '0';
+				spec->i++;
+			}
 			return ;
 		}
 	}
@@ -110,18 +229,26 @@ void	ft_print4(t_ran *ran, t_spec *spec)
 
 void ft_print3(t_ran *ran, t_spec *spec)
 {
+	if (spec->acc == -1)
+		return ;
 	if (spec->grid == 1 && spec->buf[0] != '0')
 	{
 		ft_checkgrid(ran, spec);
-		while (ran->j < spec->acc - ft_strlen(spec->buf) + 2)
+		spec->i += 2;
+		while (spec->i < spec->acc - ft_strlen(spec->buf) + 2)
+		{
 			ran->buf[ran->j++] = '0';
+			spec->i++;
+		}
 		ft_strjcpy(ran->buf, spec->buf, &ran->j);
 		return ;
 	}
-	while (ran->j < spec->acc - ft_strlen(spec->buf))
+	while (spec->i < spec->acc - ft_strlen(spec->buf))
+	{
 		ran->buf[ran->j++] = '0';
+		spec->i++;
+	}
 	ft_strjcpy(ran->buf, spec->buf, &ran->j);
-
 }
 
 void ft_print2(t_ran *ran, t_spec *spec)
@@ -242,6 +369,7 @@ void	ft_print1(t_ran *ran, t_spec *spec)
 
 void	ft_bufjoin_x(t_ran *ran, t_spec *spec)
 {
+		spec->i = 0;
 	if (spec->width == 0 && spec->acc == 0)
 		ft_print1(ran, spec);
 	if (spec->width != 0 && spec->acc == 0)
