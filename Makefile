@@ -6,7 +6,7 @@ OBJ = $(SRCS:.c=.o)
 
 HEADER = ft_printf.h
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g
 
 all: $(NAME)
 

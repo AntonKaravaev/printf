@@ -6,7 +6,7 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 21:29:58 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/06/20 22:04:55 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/06/23 23:32:43 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,31 +55,31 @@ void	*extend_buf(t_ran *ran)
 	return (ran->buf);
 }
 
-void	ft_reworkbuf(t_spec *spec)
+void	ft_reworkbuf(t_spec *s)
 {
-	if (spec->buf)
-		ft_strdel(&spec->buf);
-	if (!(spec->buf = (char *)malloc(sizeof(char) * 1001)))
+	if (s->buf)
+		ft_strdel(&s->buf);
+	if (!(s->buf = (char *)malloc(sizeof(char) * 1001)))
 		exit(-1);
-	ft_bzero(spec->buf, 1001);
+	ft_bzero(s->buf, 1001);
 }
 
-void	ft_newstruct(t_spec *spec)
+void	ft_newstruct(t_spec *s)
 {
-	spec->i = 0;
-	spec->j = 0;
-	spec->z = 0;
-	spec->space = 0;
-	spec->flag = 0;
-	spec->zero = 0;
-	spec->minus = 0;
-	spec->plus = 0;
-	spec->grid = 0;
-	spec->pmz = 0;
-	spec->width = 0;
-	spec->acc = 0;
-	spec->allflagzero = 0;
-	if (!(spec->buf = (char *)malloc(sizeof(char) * 1001)))
+	s->i = 0;
+	s->j = 0;
+	s->z = 0;
+	s->space = 0;
+	s->flag = 0;
+	s->zero = 0;
+	s->minus = 0;
+	s->plus = 0;
+	s->grid = 0;
+	s->pmz = 0;
+	s->width = 0;
+	s->acc = 0;
+	s->allflagzero = 0;
+	if (!(s->buf = (char *)malloc(sizeof(char) * 1001)))
 		exit(-1);
-	ft_bzero(spec->buf, 1001);
+	ft_bzero(s->buf, 1001);
 }

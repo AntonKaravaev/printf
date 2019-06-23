@@ -6,15 +6,15 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 19:50:48 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/06/21 18:41:23 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/06/24 01:49:28 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_checcon(char *str, int j, t_spec *spec, t_ran *ran)
+int		ft_checcon(char *str, int j, t_spec *s, t_ran *ran)
 {
-	ft_easyflag(str, spec, j);
+	ft_easyflag(str, s, j);
 	while (str[j] != '\0' && str[j] != '%' && str[j] != 'c' && str[j] != 's'
 		&& str[j] != 'p' && str[j] != 'd' && str[j] != 'i' && str[j] != 'o'
 		&& str[j] != 'u' && str[j] != 'x' && str[j] != 'X' && str[j] != 'f'
@@ -36,7 +36,7 @@ int		ft_checcon(char *str, int j, t_spec *spec, t_ran *ran)
 	return (0);
 }
 
-int		checkiftext(char *str, t_ran *ran, t_spec *spec)
+int		checkiftext(char *str, t_ran *ran, t_spec *s)
 {
 	int	j;
 
@@ -51,17 +51,20 @@ int		checkiftext(char *str, t_ran *ran, t_spec *spec)
 	else if (str[j] == '%')
 	{
 		j++;
-		if (ft_checcon(str, j, spec, ran) == 1)
+		if (ft_checcon(str, j, s, ran) == 1)
 			return (1);
 	}
 	return (0);
 }
 
-void	ft_start(char *str, va_list *vl, t_ran *ran, t_spec *spec)
+void	ft_start(char *str, va_list *vl, t_ran *ran)
 {
+	t_spec	s;
+
 	while (str[ran->i] != '\0')
 	{
-		if (checkiftext(str, ran, spec) == 1)
+		ft_newstruct(&s);
+		if (checkiftext(str, ran, &s) == 1)
 		{
 			if (ran->j < ran->bs)
 				ran->buf[ran->j++] = str[ran->i++];
@@ -71,9 +74,10 @@ void	ft_start(char *str, va_list *vl, t_ran *ran, t_spec *spec)
 			if (ran->ret == 1)
 				return ;
 			ran->i++;
-			ft_recconver(str, ran, vl, spec);
+			ft_recconver(str, ran, vl, &s);
 			ran->i++;
 		}
+		ft_strdel(&s.buf);
 	}
 }
 
@@ -81,7 +85,6 @@ int		ft_printf(const char *restrict str, ...)
 {
 	va_list	vl;
 	t_ran	ran;
-	t_spec	spec;
 	int		length;
 
 	ran.i = 0;
@@ -89,12 +92,11 @@ int		ft_printf(const char *restrict str, ...)
 	ran.ret = 0;
 	ran.bs = 101;
 	length = 0;
-	ft_newstruct(&spec);
 	va_start(vl, str);
 	if (!(ran.buf = (char *)malloc(sizeof(char) * ran.bs)))
 		return (-1);
 	ft_bzero(ran.buf, ran.bs);
-	ft_start((char *)str, &vl, &ran, &spec);
+	ft_start((char *)str, &vl, &ran);
 	length = ft_strlen(ran.buf);
 	ft_putstr(ran.buf);
 	ft_strdel(&ran.buf);
@@ -102,13 +104,14 @@ int		ft_printf(const char *restrict str, ...)
 	return (length);
 }
 
-// int		main()
+// int		main(void)
 // {
 //
-// 	ft_printf("%-8.3x\n", 8375);
-//
-// // 	//printf("%X\n", 4294967296);
-//
+// 	ft_printf("%-5.2d\n", -100);
+// 	printf("%-5.2d\n", -100);
+// 	// //
+// 	// ft_printf("%010x\n", 42);
+// 	// printf("%010x\n", 42);
 //
 // 	return (0);
 // }
