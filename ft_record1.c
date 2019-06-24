@@ -36,23 +36,19 @@ void	ft_p_record(char *str, t_ran *ran, t_spec *s)
 
 void	ft_d_record(t_ran *ran, va_list *vl, t_spec *s)
 {
-	unsigned long long int	num;
-	int						bl;
+	long long int	num;
 
-	bl = 0;
-	num = va_arg (*vl, unsigned long long int);
-	s->buf = ft_itoa(num);
-	ft_bufjoin_x(ran, s);
-	// if (s->flag == 0)
-	// 	ft_dui(s, ran, num, bl);
-	// else if (s->flag == 1)
-	// 	ft_dusi(s, ran, num, bl);
-	// else if (s->flag == 2)
-	// 	ft_ducc(s, ran, num, bl);
-	// else if (s->flag == 3)
-	// 	ft_duli(s, ran, num, bl);
-	// else
-	// 	ft_dulli(s, ran, num, bl);
+	num = va_arg (*vl, long long int);
+	if (s->flag == 0)
+		ft_dui(s, ran, num);
+	else if (s->flag == 1)
+		ft_dusi(s, ran, num);
+	else if (s->flag == 2)
+		ft_ducc(s, ran, num);
+	else if (s->flag == 3)
+		ft_duli(s, ran, num);
+	else
+		ft_dulli(s, ran, num);
 }
 
 // void	ft_i_record(char *str, t_ran *ran, va_list *vl, t_spec *spec)

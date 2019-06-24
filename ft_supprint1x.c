@@ -5,98 +5,131 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/24 00:41:22 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/06/24 00:56:03 by crenly-b         ###   ########.fr       */
+/*   Created: 2019/06/24 00:05:26 by crenly-b          #+#    #+#             */
+/*   Updated: 2019/06/24 22:35:12 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_print4(t_ran *ran, t_spec *s)
+void	ft_print4_2(t_ran *ran, t_spec *s)
 {
-	ft_print4_1(ran, s);
-	ft_print4_2(ran, s);
-	if (s->minus == 1 && s->buf[0] != '0')
+	if (s->allflagzero == 1 && s->acc != -1 && s->i == 0)
 	{
 		if (s->width >= s->acc)
-			ft_print4_3(ran, s);
+		{
+			while (s->i < s->width - ft_biggeraccornum(s))
+			{
+				ran->buf[ran->j++] = ' ';
+				s->i++;
+			}
+			while (s->i++ < s->width - ft_strlen(s->buf) && s->buf[0] != '0')
+				ran->buf[ran->j++] = '0';
+			ft_strjcpy(ran->buf, s, &ran->j);
+			return ;
+		}
 		else
-			ft_print4_4(ran, s);
+		{
+			while ((s->i++ < s->acc - ft_strlen(s->buf)) && s->buf[0] != '0')
+				ran->buf[ran->j++] = '0';
+			ft_strjcpy(ran->buf, s, &ran->j);
+			return ;
+		}
 	}
-	if (s->i > 0)
-		return ;
-	if (s->width >= s->acc)
-		ft_print4_5(ran, s);
-	else
-		ft_print4_6(ran, s);
 }
 
-void	ft_print3(t_ran *ran, t_spec *s)
+void	ft_print4_3(t_ran *ran, t_spec *s)
 {
-	if (s->acc == -1)
-		return ;
-	if (s->grid == 1 && s->buf[0] != '0')
+	if (s->grid == 1)
 	{
-		ft_checkgrid(ran, s);
-		s->i += 2;
-		while (s->i < s->acc - ft_strlen(s->buf) + 2)
-		{
-			ran->buf[ran->j++] = '0';
-			s->i++;
-		}
-		ft_strjcpy(ran->buf, s, &ran->j);
+		ft_print4grid(ran, s);
 		return ;
 	}
-	while (s->i < s->acc - ft_strlen(s->buf))
+	if (s->acc < ft_strlen(s->buf))
+	{
+		ft_strjcpy(ran->buf, s, &ran->j);
+		s->i += ft_strlen(s->buf);
+		while (s->i++ < s->width)
+			ran->buf[ran->j++] = ' ';
+		return ;
+	}
+	while (s->i < s->width - ft_biggeraccornum(s))
 	{
 		ran->buf[ran->j++] = '0';
 		s->i++;
 	}
 	ft_strjcpy(ran->buf, s, &ran->j);
+	s->i += ft_strlen(s->buf);
+	while (s->i++ < s->width)
+		ran->buf[ran->j++] = ' ';
+	return ;
 }
 
-void	ft_print2(t_ran *ran, t_spec *s)
+void	ft_print4_4(t_ran *ran, t_spec *s)
 {
-	if (s->zero == 0)
+	if (s->i == 0)
 	{
-		ft_print2_1(ran, s);
+		if (s->grid == 1)
+		{
+			ft_print4grid(ran, s);
+			return ;
+		}
+		if (s->acc >= ft_strlen(s->buf))
+		{
+			while (s->i < s->acc - ft_strlen(s->buf))
+			{
+				ran->buf[ran->j++] = '0';
+				s->i++;
+			}
+		}
+		ft_strjcpy(ran->buf, s, &ran->j);
+		s->i += ft_strlen(s->buf);
+		while (s->i++ < s->acc - ft_strlen(s->buf))
+			ran->buf[ran->j++] = '0';
 		return ;
 	}
-	else
+}
+
+void	ft_print4_5(t_ran *ran, t_spec *s)
+{
+	if (s->grid == 1)
 	{
-		if (s->minus == 0)
+		ft_print4grid(ran, s);
+		return ;
+	}
+	while (ran->j < s->width - ft_biggeraccornum(s))
+	{
+		ran->buf[ran->j++] = ' ';
+		s->i++;
+	}
+	while (s->i++ < s->width - ft_strlen(s->buf))
+		ran->buf[ran->j++] = '0';
+	ft_strjcpy(ran->buf, s, &ran->j);
+}
+
+void	ft_print4_6(t_ran *ran, t_spec *s)
+{
+	if (s->i == 0)
+	{
+		if (s->grid == 1)
 		{
-			ft_checkgridplus2(ran, s);
-			while (s->i++ < s->width && s->minus == 0)
+			ft_checkgrid(ran, s);
+			while (s->i++ < s->acc - ft_strlen(s->buf))
 				ran->buf[ran->j++] = '0';
 			ft_strjcpy(ran->buf, s, &ran->j);
 			return ;
 		}
-		ft_checkgridplus2(ran, s);
-		ft_strjcpy(ran->buf, s, &ran->j);
-		while (s->i < s->width)
+		if (s->acc >= ft_strlen(s->buf))
 		{
-			ran->buf[ran->j++] = ' ';
-			s->i++;
+			while (s->i < s->acc - ft_strlen(s->buf))
+			{
+				ran->buf[ran->j++] = '0';
+				s->i++;
+			}
 		}
+		ft_strjcpy(ran->buf, s, &ran->j);
+		s->i += ft_strlen(s->buf);
+		while (s->i++ < s->acc - ft_strlen(s->buf))
+			ran->buf[ran->j++] = '0';
 	}
-}
-
-void	ft_print1(t_ran *ran, t_spec *s)
-{
-	ft_checkgrid(ran, s);
-	ft_strjcpy(ran->buf, s, &ran->j);
-}
-
-void	ft_bufjoin_x(t_ran *ran, t_spec *s)
-{
-	s->i = 0;
-	if (s->width == 0 && s->acc == 0)
-		ft_print1(ran, s);
-	if (s->width != 0 && s->acc == 0)
-		ft_print2(ran, s);
-	if (s->width == 0 && s->acc != 0)
-		ft_print3(ran, s);
-	if (s->width != 0 && s->acc != 0)
-		ft_print4(ran, s);
 }

@@ -6,7 +6,7 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/14 12:00:40 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/06/24 01:41:50 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/06/24 22:35:23 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,6 @@ void	ft_recconver(char *str, t_ran *ran, va_list *vl, t_spec *s)
 		ft_x_record(ran, vl, s);
 	if (ran->conver == 'X')
 		ft_X_record(ran, vl, s);
-
 	// if (ran->conver == 'f')
 	// 	ft_f_record(str, ran, vl, s);
-	ft_newstruct(s);
 }

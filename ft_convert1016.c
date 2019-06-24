@@ -6,13 +6,13 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 21:39:09 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/06/23 23:32:46 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/06/24 22:35:32 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_ui(t_spec *spec, t_ran *ran, unsigned long long int num,
+void	ft_ui(t_spec *s, t_ran *ran, unsigned long long int num,
 	int sm)
 {
 	unsigned int	remainder;
@@ -20,27 +20,27 @@ void	ft_ui(t_spec *spec, t_ran *ran, unsigned long long int num,
 
 	localnum = (unsigned int)num;
 	if (localnum == 0)
-		spec->buf[spec->j++] = 48 + localnum;
+		s->buf[s->j++] = 48 + localnum;
 	while (localnum != 0)
 	{
 		remainder = localnum % 16;
 		if (remainder < 10)
-			spec->buf[spec->j++] = 48 + remainder;
+			s->buf[s->j++] = 48 + remainder;
 		else
-			spec->buf[spec->j++] = 55 + sm + remainder;
+			s->buf[s->j++] = 55 + sm + remainder;
 		localnum = localnum / 16;
 	}
-	spec->j--;
-	while (spec->i < spec->j)
+	s->j--;
+	while (s->i < s->j)
 	{
-		remainder = spec->buf[spec->i];
-		spec->buf[spec->i++] = spec->buf[spec->j];
-		spec->buf[spec->j--] = remainder;
+		remainder = s->buf[s->i];
+		s->buf[s->i++] = s->buf[s->j];
+		s->buf[s->j--] = remainder;
 	}
-	ft_bufjoin_x(ran, spec);
+	ft_bufjoin_x(ran, s);
 }
 
-void	ft_usi(t_spec *spec, t_ran *ran, unsigned long long int num,
+void	ft_usi(t_spec *s, t_ran *ran, unsigned long long int num,
 	int sm)
 {
 	unsigned short int	remainder;
@@ -48,27 +48,27 @@ void	ft_usi(t_spec *spec, t_ran *ran, unsigned long long int num,
 
 	localnum = (unsigned short int)num;
 	if (localnum == 0)
-		spec->buf[spec->j++] = 48 + localnum;
+		s->buf[s->j++] = 48 + localnum;
 	while (localnum != 0)
 	{
 		remainder = localnum % 16;
 		if (remainder < 10)
-			spec->buf[spec->j++] = 48 + remainder;
+			s->buf[s->j++] = 48 + remainder;
 		else
-			spec->buf[spec->j++] = 55 + sm + remainder;
+			s->buf[s->j++] = 55 + sm + remainder;
 		localnum = localnum / 16;
 	}
-	spec->j--;
-	while (spec->i < spec->j)
+	s->j--;
+	while (s->i < s->j)
 	{
-		remainder = spec->buf[spec->i];
-		spec->buf[spec->i++] = spec->buf[spec->j];
-		spec->buf[spec->j--] = remainder;
+		remainder = s->buf[s->i];
+		s->buf[s->i++] = s->buf[s->j];
+		s->buf[s->j--] = remainder;
 	}
-	ft_bufjoin_x(ran, spec);
+	ft_bufjoin_x(ran, s);
 }
 
-void	ft_ucc(t_spec *spec, t_ran *ran, unsigned long long int num,
+void	ft_ucc(t_spec *s, t_ran *ran, unsigned long long int num,
 	int sm)
 {
 	unsigned char	remainder;
@@ -76,27 +76,27 @@ void	ft_ucc(t_spec *spec, t_ran *ran, unsigned long long int num,
 
 	localnum = (unsigned char)num;
 	if (localnum == 0)
-		spec->buf[spec->j++] = 48 + localnum;
+		s->buf[s->j++] = 48 + localnum;
 	while (localnum != 0)
 	{
 		remainder = localnum % 16;
 		if (remainder < 10)
-			spec->buf[spec->j++] = 48 + remainder;
+			s->buf[s->j++] = 48 + remainder;
 		else
-			spec->buf[spec->j++] = 55 + sm + remainder;
+			s->buf[s->j++] = 55 + sm + remainder;
 		localnum = localnum / 16;
 	}
-	spec->j--;
-	while (spec->i < spec->j)
+	s->j--;
+	while (s->i < s->j)
 	{
-		remainder = spec->buf[spec->i];
-		spec->buf[spec->i++] = spec->buf[spec->j];
-		spec->buf[spec->j--] = remainder;
+		remainder = s->buf[s->i];
+		s->buf[s->i++] = s->buf[s->j];
+		s->buf[s->j--] = remainder;
 	}
-	ft_bufjoin_x(ran, spec);
+	ft_bufjoin_x(ran, s);
 }
 
-void	ft_uli(t_spec *spec, t_ran *ran, unsigned long long int num,
+void	ft_uli(t_spec *s, t_ran *ran, unsigned long long int num,
 	int sm)
 {
 	unsigned long int	remainder;
@@ -104,27 +104,27 @@ void	ft_uli(t_spec *spec, t_ran *ran, unsigned long long int num,
 
 	localnum = (unsigned long int)num;
 	if (localnum == 0)
-		spec->buf[spec->j++] = 48 + localnum;
+		s->buf[s->j++] = 48 + localnum;
 	while (localnum != 0)
 	{
 		remainder = localnum % 16;
 		if (remainder < 10)
-			spec->buf[spec->j++] = 48 + remainder;
+			s->buf[s->j++] = 48 + remainder;
 		else
-			spec->buf[spec->j++] = 55 + sm + remainder;
+			s->buf[s->j++] = 55 + sm + remainder;
 		localnum = localnum / 16;
 	}
-	spec->j--;
-	while (spec->i < spec->j)
+	s->j--;
+	while (s->i < s->j)
 	{
-		remainder = spec->buf[spec->i];
-		spec->buf[spec->i++] = spec->buf[spec->j];
-		spec->buf[spec->j--] = remainder;
+		remainder = s->buf[s->i];
+		s->buf[s->i++] = s->buf[s->j];
+		s->buf[s->j--] = remainder;
 	}
-	ft_bufjoin_x(ran, spec);
+	ft_bufjoin_x(ran, s);
 }
 
-void	ft_ulli(t_spec *spec, t_ran *ran, unsigned long long int num,
+void	ft_ulli(t_spec *s, t_ran *ran, unsigned long long int num,
 	int sm)
 {
 	unsigned long long int	remainder;
@@ -132,22 +132,22 @@ void	ft_ulli(t_spec *spec, t_ran *ran, unsigned long long int num,
 
 	localnum = (unsigned long long int)num;
 	if (localnum == 0)
-		spec->buf[spec->j++] = 48 + localnum;
+		s->buf[s->j++] = 48 + localnum;
 	while (localnum != 0)
 	{
 		remainder = localnum % 16;
 		if (remainder < 10)
-			spec->buf[spec->j++] = 48 + remainder;
+			s->buf[s->j++] = 48 + remainder;
 		else
-			spec->buf[spec->j++] = 55 + sm + remainder;
+			s->buf[s->j++] = 55 + sm + remainder;
 		localnum = localnum / 16;
 	}
-	spec->j--;
-	while (spec->i < spec->j)
+	s->j--;
+	while (s->i < s->j)
 	{
-		remainder = spec->buf[spec->i];
-		spec->buf[spec->i++] = spec->buf[spec->j];
-		spec->buf[spec->j--] = remainder;
+		remainder = s->buf[s->i];
+		s->buf[s->i++] = s->buf[s->j];
+		s->buf[s->j--] = remainder;
 	}
-	ft_bufjoin_x(ran, spec);
+	ft_bufjoin_x(ran, s);
 }

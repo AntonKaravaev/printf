@@ -6,7 +6,7 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/14 11:50:19 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/06/24 01:40:43 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/06/24 22:35:24 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdarg.h>
+#include <limits.h>
 
 typedef struct s_spec
 {
@@ -55,6 +56,12 @@ void	ft_findflags(char *str, t_ran *ran, t_spec *s);
 void	ft_c_record(char *str, t_ran *ran, va_list *vl, t_spec *s);
 void	ft_s_record(char *str, t_ran *ran, va_list *vl, t_spec *s);
 void	ft_d_record(t_ran *ran, va_list *vl, t_spec *s);
+void	ft_dui(t_spec *spec, t_ran *ran, unsigned long long int num);
+void	ft_dusi(t_spec *spec, t_ran *ran, unsigned long long int num);
+void	ft_ducc(t_spec *spec, t_ran *ran, unsigned long long int num);
+void	ft_duli(t_spec *spec, t_ran *ran, unsigned long long int num);
+void	ft_dulli(t_spec *spec, t_ran *ran, unsigned long long int num);
+void	ft_bufjoin_d(t_ran *ran, t_spec *s);
 
 
 void	ft_findpmz(t_spec *spec, int num);
@@ -66,9 +73,8 @@ void	ft_X_record(t_ran *ran, va_list *vl, t_spec *s);
 void	ft_f_record(char *str, t_ran *ran, va_list *vl, t_spec *s);
 char	*ft_strcpy(char *dest, const char *src);
 char	*ft_strdup(const char *s);
-char	*ft_itoa(int n);
+char	*ft_itoa(int n, t_spec *s);
 int		ft_atoi(const char *str);
-void	ft_findpmz(t_spec *s, int num);
 void	ft_strjcpy(char *dest, t_spec *s, int *j);
 void	ft_easyflag(char *str, t_spec *s, int j);
 void 	*extend_buf(t_ran *ran);

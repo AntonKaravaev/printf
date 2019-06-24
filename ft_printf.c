@@ -6,7 +6,7 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 19:50:48 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/06/24 01:49:28 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/06/24 22:59:20 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,10 @@ void	ft_start(char *str, va_list *vl, t_ran *ran)
 		else
 		{
 			if (ran->ret == 1)
+			{
+				ft_strdel(&s.buf);
 				return ;
+			}
 			ran->i++;
 			ft_recconver(str, ran, vl, &s);
 			ran->i++;
@@ -106,12 +109,14 @@ int		ft_printf(const char *restrict str, ...)
 
 // int		main(void)
 // {
-//
-// 	ft_printf("%-5.2d\n", -100);
-// 	printf("%-5.2d\n", -100);
-// 	// //
-// 	// ft_printf("%010x\n", 42);
-// 	// printf("%010x\n", 42);
+// 	// printf("%+d", 4242424242424242424242);
+// 	printf("%+7d\n", 0);
+// 	ft_printf("%+7d\n", 0);
+// 	// printf("q%+5.d\n", 0);
+// 	//
+// 	// ft_printf("%d\n", 0);
+// 	// ft_printf("%1d\n", 0);
+// 	// ft_printf("%5.d\n", 0);
 //
 // 	return (0);
 // }

@@ -6,58 +6,86 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/14 12:00:36 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/06/23 23:32:44 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/06/24 23:24:11 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static char	*fill(int sign, int i, int n, char *str)
+int		ft_checkdzero(t_spec *s, int n)
 {
-	int j;
+	if (n == 0)
+	{
+		if (s->space == 1 && s->width == 0 && (s->acc == 0 || s->acc != -1)
+			&& s->zero == 0 && s->minus == 0)
+		{
+			s->buf[s->j++] = ' ';
+			s->buf[s->j++] = '0';
+			return (1);
+		}// 537
+		if (n == 0 && s->space == 0 && s->width == 0 && (s->acc == 0 || s->acc != -1)
+			&& s->zero == 0 && s->minus == 0 && s->plus == 1)
+		{
+			s->buf[s->j++] = '+';
+			s->buf[s->j++] = '0';
+			return (1);
+		}
+		if (n == 0 && s->space == 0 && s->width != 0 && (s->acc == 0 || s->acc != -1)
+			&& s->zero == 0 && s->minus == 0 && s->plus == 1)
+		{
+			s->buf[s->j++] = '+';
+			while (s->j < s->width)
+			{
+				s->buf[s->j++] = '0';
+				s->j++;
+			}
 
-	j = 0;
-	if (sign == 1)
-	{
-		str[j] = '-';
-		j++;
+			return (1);
+		}
 	}
-	while (i > 0)
-	{
-		str[j] = n / i + '0';
-		n = n % i;
-		i = i / 10;
-		j++;
-	}
-	str[j] = '\0';
-	return (str);
+	return (0);
 }
 
-char		*ft_itoa(int n)
+
+static 	char	*fill(int i, int n, t_spec *s)
 {
-	char			*str;
+	if (ft_checkdzero(s, n) == 1)
+		return (s->buf);
+	// if (s->pmz == 1)
+	// 	s->buf[s->j++] = '-';
+	// else if (s->plus == 1)
+	// 	s->buf[s->j++] = '+';
+	while (i > 0)
+	{
+		s->buf[s->j++] = n / i + '0';
+		n = n % i;
+		i = i / 10;
+	}
+	s->buf[s->j] = '\0';
+	return (s->buf);
+}
+
+char		*ft_itoa(int n, t_spec *s)
+{
 	unsigned int	i;
-	int				sign_flag;
 	int				count;
 
 	if (n == -2147483648)
-		return (ft_strdup("-2147483648"));
-	sign_flag = 0;
-	count = 0;
-	if (n < 0)
+		s->buf = ft_strdup("-2147483648");
+	else
 	{
-		sign_flag = 1;
-		n = -n;
+		count = 0;
+		if (s->pmz == 1)
+			n = -n;
+		i = 1;
+		while (n / i > 9)
+		{
+			i = i * 10;
+			count++;
+		}
+		fill(i, n, s);
 	}
-	i = 1;
-	while (n / i > 9)
-	{
-		i = i * 10;
-		count++;
-	}
-	if (!(str = (char*)malloc(sizeof(char) * (count + 1 + sign_flag) + 1)))
-		return (NULL);
-	return (fill(sign_flag, i, n, str));
+	return (s->buf);
 }
 
 static	int	space_free(const char *str)

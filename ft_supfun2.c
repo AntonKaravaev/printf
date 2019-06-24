@@ -6,20 +6,11 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 21:27:32 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/06/24 01:34:17 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/06/24 22:35:17 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-void	ft_findpmz(t_spec *s, int num)
-{
-	s->pmz = 0;
-	if (num < 0)
-		s->pmz = 1;
-	else if (num == 0)
-		s->pmz = 2;
-}
 
 void	ft_strjcpy(char *dest, t_spec *s, int *j)
 {
