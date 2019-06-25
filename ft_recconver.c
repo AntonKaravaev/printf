@@ -6,7 +6,7 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/14 12:00:40 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/06/25 19:49:22 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/06/25 23:33:36 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,8 @@ void	ft_recconver(char *str, t_ran *ran, va_list *vl, t_spec *s)
 		ft_p_record(str, ran, s);
 	if (ran->conver == 'c')
 		ft_c_record(ran, vl, s);
-	// if (ran->conver == 's')
-	// ft_s_record(str, ran, vl, s);
+	if (ran->conver == 's')
+		ft_s_record(ran, vl, s);
 	// if (ran->conver == 'p')
 	// ft_p_record(str, ran, vl, s);
 	if (ran->conver == 'd' || ran->conver == 'i')

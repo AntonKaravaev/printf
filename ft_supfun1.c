@@ -6,7 +6,7 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 21:28:26 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/06/25 21:31:19 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/06/25 22:50:42 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,18 @@ void	ft_putstr(char *str, t_ran ran, int *j)
 	int	i;
 
 	i = 0;
-	if (ran.fzero == 0)
-		*j = ft_strlen(ran.buf);
 	while (str[i] != '\0' || ran.fzero > 0)
 	{
 		if (str[i] == '\0')
 		{
-			if (*j == 0)
-				*j = i + 1;
+			*j -= 1;
 			ft_putchar(str[i]);
 			ran.fzero--;
 		}
 		else
 			ft_putchar(str[i]);
 		i++;
+		*j = i;
 	}
 }
 

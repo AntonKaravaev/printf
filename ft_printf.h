@@ -6,7 +6,7 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/14 11:50:19 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/06/25 21:27:47 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/06/25 23:00:23 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int		ft_strlen(char *str);
 void	ft_newstruct(t_spec *s);
 void	ft_findflags(char *str, t_ran *ran, t_spec *s);
 void	ft_c_record(t_ran *ran, va_list *vl, t_spec *s);
-void	ft_s_record(char *str, t_ran *ran, va_list *vl, t_spec *s);
+void	ft_s_record(t_ran *ran, va_list *vl, t_spec *s);
 void	ft_d_record(t_ran *ran, va_list *vl, t_spec *s);
 void	ft_dui(t_spec *spec, t_ran *ran, unsigned long long int num);
 void	ft_dusi(t_spec *spec, t_ran *ran, unsigned long long int num);

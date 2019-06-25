@@ -6,7 +6,7 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 19:50:48 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/06/25 21:28:24 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/06/25 23:24:33 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int		ft_printf(const char *restrict str, ...)
 	ran.ret = 0;
 	ran.fzero = 0;
 	ran.strlen = 0;
-	ran.bs = 101;
+	ran.bs = 1001;
 	length = 0;
 	va_start(vl, str);
 	if (!(ran.buf = (char *)malloc(sizeof(char) * ran.bs)))
@@ -108,11 +108,11 @@ int		ft_printf(const char *restrict str, ...)
 	va_end(vl);
 	return (length);
 }
-
+// 
 // int		main(void)
 // {
-// 	// printf("%+d", 4242424242424242424242);
-// 	ft_printf("test\n");
+// //	printf("hello, %s.\n", "gavin");
+// 	ft_printf("@moulitest: %s", NULL);
 // //	printf("%.2c", NULL);
 //
 // 	// printf("q%+5.d\n", 0);

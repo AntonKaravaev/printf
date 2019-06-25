@@ -8,17 +8,14 @@ void	ft_c_record(t_ran *ran, va_list *vl, t_spec *s)
 
 	if (c == '\0')
 		ran->fzero++;
-	if (s->width == 0 && (s->acc == 0 || s->acc == -1))
-			ran->buf[ran->j++] = c;
-
+	if (s->width == 0)
+		ran->buf[ran->j++] = c;
 	if (s->width > 0 && s->minus == 1)
 	{
 		ran->buf[ran->j++] = c;
 		while (s->width-- > 1)
 			ran->buf[ran->j++] = ' ';
-
 	}
-
 	if (s->width > 0 && s->minus == 0)
 	{
 		while (s->width-- > 1)
@@ -27,6 +24,33 @@ void	ft_c_record(t_ran *ran, va_list *vl, t_spec *s)
 	}
 }
 
+void	ft_s_record(t_ran *ran, va_list *vl, t_spec *s)
+{
+	char	*str;
+	char	*s_nul;
+	int		len;
+
+	s_nul = "(null)\0";
+	str = (va_arg(*vl, char*));
+	if (str == '\0')
+		str = s_nul;
+	len = ft_strlen(str);
+	if (s->acc < len)
+		len = s->acc;
+	if (s->width < len && (s->acc == 0 || s->acc == -1))
+	{
+		while (*str)
+			ran->buf[ran->j++] = *str++;
+	}
+	if (s->width > len)
+	{
+		while(ran->j < s->width - len)
+			ran->buf[ran->j++] = ' ';
+		while (*str)
+			ran->buf[ran->j++] = *str++;
+	}
+
+}
 
 void	ft_p_record(char *str, t_ran *ran, t_spec *s)
 {
