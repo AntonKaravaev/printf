@@ -6,7 +6,7 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 19:50:48 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/06/24 22:59:20 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/06/25 21:28:24 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ int		ft_printf(const char *restrict str, ...)
 	ran.i = 0;
 	ran.j = 0;
 	ran.ret = 0;
+	ran.fzero = 0;
+	ran.strlen = 0;
 	ran.bs = 101;
 	length = 0;
 	va_start(vl, str);
@@ -100,8 +102,8 @@ int		ft_printf(const char *restrict str, ...)
 		return (-1);
 	ft_bzero(ran.buf, ran.bs);
 	ft_start((char *)str, &vl, &ran);
-	length = ft_strlen(ran.buf);
-	ft_putstr(ran.buf);
+	ft_putstr(ran.buf, ran, &ran.strlen);
+	length = ran.strlen;
 	ft_strdel(&ran.buf);
 	va_end(vl);
 	return (length);
@@ -110,8 +112,9 @@ int		ft_printf(const char *restrict str, ...)
 // int		main(void)
 // {
 // 	// printf("%+d", 4242424242424242424242);
-// 	printf("%+7d\n", 0);
-// 	ft_printf("%+7d\n", 0);
+// 	ft_printf("test\n");
+// //	printf("%.2c", NULL);
+//
 // 	// printf("q%+5.d\n", 0);
 // 	//
 // 	// ft_printf("%d\n", 0);

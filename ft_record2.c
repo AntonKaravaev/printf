@@ -6,7 +6,7 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 00:40:06 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/06/24 22:35:19 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/06/25 19:35:57 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,6 @@ void	ft_X_record(t_ran *ran, va_list *vl, t_spec *s)
 
 // void	ft_f_record(char *str, t_ran *ran, va_list *vl, t_spec *spec)
 // {
-//
+// 	if ()
 //
 // }

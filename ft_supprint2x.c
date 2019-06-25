@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_supprint1x.c                                    :+:      :+:    :+:   */
+/*   ft_supprint2x.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 00:41:22 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/06/24 00:56:03 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/06/25 15:22:53 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,10 @@ void	ft_print3(t_ran *ran, t_spec *s)
 		ft_strjcpy(ran->buf, s, &ran->j);
 		return ;
 	}
+	if (ran->conver == 'd' && s->pmz == 1)
+		ran->buf[ran->j++] = '-';
+	if (ran->conver == 'd' && s->plus == 1 && s->pmz != 1)
+		ran->buf[ran->j++] = '+';
 	while (s->i < s->acc - ft_strlen(s->buf))
 	{
 		ran->buf[ran->j++] = '0';
@@ -84,6 +88,13 @@ void	ft_print2(t_ran *ran, t_spec *s)
 
 void	ft_print1(t_ran *ran, t_spec *s)
 {
+	if (ran->conver == 'd')
+	{
+		if (s->pmz == 1)
+			ran->buf[ran->j++] = '-';
+		if (s->plus == 1 && s->pmz != 1)
+			ran->buf[ran->j++] = '+';
+	}
 	ft_checkgrid(ran, s);
 	ft_strjcpy(ran->buf, s, &ran->j);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_supfun.c                                        :+:      :+:    :+:   */
+/*   ft_supfun1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 21:28:26 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/06/24 22:35:18 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/06/25 21:31:19 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,24 @@ void	ft_putchar(char c)
 	write(1, &c, 1);
 }
 
-void	ft_putstr(char *str)
+void	ft_putstr(char *str, t_ran ran, int *j)
 {
 	int	i;
 
 	i = 0;
-	while (str[i] != '\0')
+	if (ran.fzero == 0)
+		*j = ft_strlen(ran.buf);
+	while (str[i] != '\0' || ran.fzero > 0)
 	{
-		ft_putchar(str[i]);
+		if (str[i] == '\0')
+		{
+			if (*j == 0)
+				*j = i + 1;
+			ft_putchar(str[i]);
+			ran.fzero--;
+		}
+		else
+			ft_putchar(str[i]);
 		i++;
 	}
 }

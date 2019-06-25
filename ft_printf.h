@@ -6,7 +6,7 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/14 11:50:19 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/06/24 22:35:24 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/06/25 21:27:47 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ typedef struct s_ran
 	char	conver;
 	int		ret;
 	char	*buf;
+	int		fzero;
+	int 	strlen;
 } t_ran;
 
 void	ft_recconver(char *str, t_ran *ran, va_list *vl, t_spec *s);
@@ -53,7 +55,7 @@ int     printf(const char *restrict format, ...);
 int		ft_strlen(char *str);
 void	ft_newstruct(t_spec *s);
 void	ft_findflags(char *str, t_ran *ran, t_spec *s);
-void	ft_c_record(char *str, t_ran *ran, va_list *vl, t_spec *s);
+void	ft_c_record(t_ran *ran, va_list *vl, t_spec *s);
 void	ft_s_record(char *str, t_ran *ran, va_list *vl, t_spec *s);
 void	ft_d_record(t_ran *ran, va_list *vl, t_spec *s);
 void	ft_dui(t_spec *spec, t_ran *ran, unsigned long long int num);
@@ -62,6 +64,9 @@ void	ft_ducc(t_spec *spec, t_ran *ran, unsigned long long int num);
 void	ft_duli(t_spec *spec, t_ran *ran, unsigned long long int num);
 void	ft_dulli(t_spec *spec, t_ran *ran, unsigned long long int num);
 void	ft_bufjoin_d(t_ran *ran, t_spec *s);
+int		ft_checkdzero(t_spec *s, int n);
+int		ft_checkdzero1(t_spec *s);
+void	ft_dmoveonestep(t_spec *s);
 
 
 void	ft_findpmz(t_spec *spec, int num);
@@ -79,7 +84,7 @@ void	ft_strjcpy(char *dest, t_spec *s, int *j);
 void	ft_easyflag(char *str, t_spec *s, int j);
 void 	*extend_buf(t_ran *ran);
 void	ft_putchar(char c);
-void	ft_putstr(char *str);
+void	ft_putstr(char *str, t_ran ran, int *i);
 void	ft_bzero(void *s, size_t size);
 void	ft_strdel(char **as);
 void	ft_reworkbuf(t_spec *s);
