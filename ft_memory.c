@@ -6,7 +6,7 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 21:29:58 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/06/24 22:35:27 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/06/26 20:03:05 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	ft_newstruct(t_spec *s)
 	s->width = 0;
 	s->acc = 0;
 	s->allflagzero = 0;
+	s->strl = 0;
 	if (!(s->buf = (char *)malloc(sizeof(char) * 1001)))
 		exit(-1);
 	ft_bzero(s->buf, 1001);

@@ -6,7 +6,7 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/14 12:00:40 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/06/25 23:33:36 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/06/27 00:47:57 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	ft_acc(char *str, t_ran *ran, t_spec *s)
 		if (str[ran->i] == '.')
 		{
 			ran->i++;
+			while (str[ran->i] == '0')
+				ran->i++;
 			if (str[ran->i] >= '1' && str[ran->i] <= '9')
 			{
 				s->buf[s->z++] = str[ran->i++];
