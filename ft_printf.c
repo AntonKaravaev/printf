@@ -6,7 +6,7 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 19:50:48 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/06/25 23:24:33 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/06/26 16:24:02 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,11 +108,11 @@ int		ft_printf(const char *restrict str, ...)
 	va_end(vl);
 	return (length);
 }
-// 
+
 // int		main(void)
 // {
 // //	printf("hello, %s.\n", "gavin");
-// 	ft_printf("@moulitest: %s", NULL);
+// 	ft_printf("hello, %s.\n", "gavin");
 // //	printf("%.2c", NULL);
 //
 // 	// printf("q%+5.d\n", 0);

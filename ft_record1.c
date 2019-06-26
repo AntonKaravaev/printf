@@ -24,6 +24,46 @@ void	ft_c_record(t_ran *ran, va_list *vl, t_spec *s)
 	}
 }
 
+
+void ft_sprint1(t_ran *ran, t_spec *s)
+{
+
+
+	if (s->width < len && (s->acc == 0 || s->acc == -1))
+	{
+		while (*str)
+			ran->buf[ran->j++] = *str++;
+	}
+	if (s->width > len && s->minus == 0)
+	{
+		while(ran->j < s->width - len)
+			ran->buf[ran->j++] = ' ';
+		while (*str)
+			ran->buf[ran->j++] = *str++;
+	}
+	if (s->width > len && s->minus == 1)
+	{
+		while (*str)
+			ran->buf[ran->j++] = *str++;
+		while(ran->j < s->width - len)
+			ran->buf[ran->j++] = ' ';
+	}
+}
+
+
+
+void	ft_bufjoin_s(t_ran *ran, t_spec *s)
+{
+	if (s->width == 0 && s->acc == 0)
+		ft_sprint1(ran, s);
+	if (s->width != 0 && s->acc == 0)
+		ft_sprint2(ran, s);
+	if (s->width == 0 && s->acc != 0)
+		ft_sprint3(ran, s);
+	if (s->width != 0 && s->acc != 0)
+		ft_sprint4(ran, s);
+}
+
 void	ft_s_record(t_ran *ran, va_list *vl, t_spec *s)
 {
 	char	*str;
@@ -32,24 +72,13 @@ void	ft_s_record(t_ran *ran, va_list *vl, t_spec *s)
 
 	s_nul = "(null)\0";
 	str = (va_arg(*vl, char*));
+
 	if (str == '\0')
 		str = s_nul;
 	len = ft_strlen(str);
-	if (s->acc < len)
+	if (s->acc < len && s->acc != 0 && s->acc != -1 && str == s_nul)
 		len = s->acc;
-	if (s->width < len && (s->acc == 0 || s->acc == -1))
-	{
-		while (*str)
-			ran->buf[ran->j++] = *str++;
-	}
-	if (s->width > len)
-	{
-		while(ran->j < s->width - len)
-			ran->buf[ran->j++] = ' ';
-		while (*str)
-			ran->buf[ran->j++] = *str++;
-	}
-
+	ft_bufjoin_s(ran, s);
 }
 
 void	ft_p_record(char *str, t_ran *ran, t_spec *s)
