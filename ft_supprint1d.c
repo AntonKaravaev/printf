@@ -42,14 +42,85 @@ int			ft_checkdzero(t_spec *s, int n)
 	return (0);
 }
 
+void	ft_dprint2(t_ran *ran, t_spec *s)
+{
+	if (s->minus == 0)
+	{
+		if (s->width <= s->strl)
+		{
+			while (s->strl--)
+				ran->buf[ran->j++] = s->buf[s->j++];
+
+		}
+		else if (s->zero == 0)
+		{
+			while (s->i < s->width - s->strl)
+			{
+				ran->buf[ran->j++] = ' ';
+				s->i++;
+			}
+			while (s->i++ < s->width)
+				ran->buf[ran->j++] = s->buf[s->j++];
+		}
+		else
+		{
+			if (s->pmz == -1 || s->pmz == 1)
+			{
+				ran->buf[ran->j++] = s->buf[0];
+				s->j++;
+				s->i++;
+				s->strl--;
+			}
+			while (s->i < s->width - s->strl)
+			{
+				ran->buf[ran->j++] = '0';
+				s->i++;
+			}
+			while (s->i++ < s->width)
+				ran->buf[ran->j++] = s->buf[s->j++];
+		}
+	}
+	else
+	{
+		if (s->width <= s->strl)
+		{
+			while (s->strl--)
+				ran->buf[ran->j++] = s->buf[s->j++];
+
+		}
+		else
+		{
+			while (s->j < s->strl)
+				ran->buf[ran->j++] = s->buf[s->j++];
+			while (s->j < s->width)
+			{
+				ran->buf[ran->j++] = ' ';
+				s->j++;
+			}
+		}
+	}
+}
+
+void	ft_dprint1(t_ran *ran, t_spec *s)
+{
+	if (s->space == 1 && s->minus == 0 && s->plus == 0 && s->zero == 0
+		&& s->grid == 0 && s->pmz != -1)
+		ran->buf[ran->j++] = ' ';
+	while (s->buf[s->j])
+		ran->buf[ran->j++] = s->buf[s->j++];
+}
+
 void	ft_bufjoin_d(t_ran *ran, t_spec *s)
 {
+	s->i = 0;
+	s->j = 0;
+	s->strl = ft_strlen(s->buf);
 	if (s->width == 0 && s->acc == 0)
-		ft_print1(ran, s);
+		ft_dprint1(ran, s);
 	if (s->width != 0 && s->acc == 0)
-		ft_print2(ran, s);
-	if (s->width == 0 && s->acc != 0)
-		ft_print3(ran, s);
-	if (s->width != 0 && s->acc != 0)
-		ft_print4(ran, s);
+		ft_dprint2(ran, s);
+	// if (s->width == 0 && s->acc != 0)
+	// 	ft_dprint3(ran, s);
+	// if (s->width != 0 && s->acc != 0)
+	// 	ft_dprint4(ran, s);
 }

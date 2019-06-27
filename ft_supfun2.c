@@ -6,7 +6,7 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 21:27:32 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/06/24 22:35:17 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/06/27 21:04:43 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void	ft_easyflag(char *str, t_spec *s, int j)
 			s->space = 1;
 		j++;
 	}
-	if (s->minus == 0 && s->plus == 0 && s->zero == 0 &&
-		s->grid == 0 && s->space == 0)
+	if (s->minus == 0 && s->plus == 0 && s->zero == 0 && s->grid == 0
+		&& s->space == 0)
 		s->allflagzero = 1;
 }
 

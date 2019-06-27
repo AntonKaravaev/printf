@@ -1,31 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_convertdigits.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/06/27 22:04:07 by crenly-b          #+#    #+#             */
+/*   Updated: 2019/06/27 22:05:56 by crenly-b         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-void	ft_dui(t_spec *s, t_ran *ran, unsigned long long int num)
+void	ft_di(t_spec *s, t_ran *ran, int num)
 {
-	int	localnum;
+	int	remainder;
 
-	localnum = (int)num;
-	if (localnum > 0)
-		s->pmz = 2;
-	else if (localnum < 0)
-		s->pmz = 1;
-	ft_itoa(localnum, s);
-	ft_bufjoin_d(ran, s);
-}
-
-void	ft_dusi(t_spec *s, t_ran *ran, unsigned long long int num)
-{
-	unsigned short int	remainder;
-	unsigned short int	localnum;
-
-	localnum = (unsigned short int)num;
-	if (localnum == 0)
-		s->buf[s->j++] = 48 + localnum;
-	while (localnum != 0)
+	ft_diexeption(s, &num);
+	while (num != 0)
 	{
-		remainder = localnum % 10;
+		remainder = num % 10;
 		s->buf[s->j++] = 48 + remainder;
-		localnum = localnum / 10;
+		num = num / 10;
 	}
 	s->j--;
 	while (s->i < s->j)
@@ -37,19 +33,16 @@ void	ft_dusi(t_spec *s, t_ran *ran, unsigned long long int num)
 	ft_bufjoin_d(ran, s);
 }
 
-void	ft_ducc(t_spec *s, t_ran *ran, unsigned long long int num)
+void	ft_dsi(t_spec *s, t_ran *ran, short int num)
 {
-	unsigned char	remainder;
-	unsigned char	localnum;
+	short int	remainder;
 
-	localnum = (unsigned char)num;
-	if (localnum == 0)
-		s->buf[s->j++] = 48 + localnum;
-	while (localnum != 0)
+	ft_dsiexeption(s, &num);
+	while (num != 0)
 	{
-		remainder = localnum % 10;
+		remainder = num % 10;
 		s->buf[s->j++] = 48 + remainder;
-		localnum = localnum / 10;
+		num = num / 10;
 	}
 	s->j--;
 	while (s->i < s->j)
@@ -61,19 +54,16 @@ void	ft_ducc(t_spec *s, t_ran *ran, unsigned long long int num)
 	ft_bufjoin_d(ran, s);
 }
 
-void	ft_duli(t_spec *s, t_ran *ran, unsigned long long int num)
+void	ft_dc(t_spec *s, t_ran *ran, char num)
 {
-	unsigned long int	remainder;
-	unsigned long int	localnum;
+	char	remainder;
 
-	localnum = (unsigned long int)num;
-	if (localnum == 0)
-		s->buf[s->j++] = 48 + localnum;
-	while (localnum != 0)
+	ft_dcexeption(s, &num);
+	while (num != 0)
 	{
-		remainder = localnum % 10;
+		remainder = num % 10;
 		s->buf[s->j++] = 48 + remainder;
-		localnum = localnum / 10;
+		num = num / 10;
 	}
 	s->j--;
 	while (s->i < s->j)
@@ -85,19 +75,47 @@ void	ft_duli(t_spec *s, t_ran *ran, unsigned long long int num)
 	ft_bufjoin_d(ran, s);
 }
 
-void	ft_dulli(t_spec *s, t_ran *ran, unsigned long long int num)
+void	ft_dli(t_spec *s, t_ran *ran, long int num)
 {
-	unsigned long long int	remainder;
-	unsigned long long int	localnum;
+	long int	remainder;
 
-	localnum = (unsigned long long int)num;
-	if (localnum == 0)
-		s->buf[s->j++] = 48 + localnum;
-	while (localnum != 0)
+	ft_dliexeption(s, &num);
+	if (num < 0)
 	{
-		remainder = localnum % 10;
+		s->pmz = -1;
+		num = num * (-1);
+	}
+	while (num != 0)
+	{
+		remainder = num % 10;
 		s->buf[s->j++] = 48 + remainder;
-		localnum = localnum / 10;
+		num = num / 10;
+	}
+	s->j--;
+	while (s->i < s->j)
+	{
+		remainder = s->buf[s->i];
+		s->buf[s->i++] = s->buf[s->j];
+		s->buf[s->j--] = remainder;
+	}
+	ft_bufjoin_d(ran, s);
+}
+
+void	ft_dlli(t_spec *s, t_ran *ran, long long int num)
+{
+	long long int remainder;
+
+	ft_dllexeption(s, &num);
+	if (num < 0)
+	{
+		s->pmz = -1;
+		num = num * (-1);
+	}
+	while (num != 0)
+	{
+		remainder = num % 10;
+		s->buf[s->j++] = 48 + remainder;
+		num = num / 10;
 	}
 	s->j--;
 	while (s->i < s->j)

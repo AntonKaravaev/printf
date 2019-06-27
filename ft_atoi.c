@@ -1,87 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa_atoi.c                                     :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/14 12:00:36 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/06/25 15:01:03 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/06/27 17:50:12 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-void	ft_dmoveonestep(t_spec *s)
-{
-	int	i;
-
-	if (s->pmz == 1 || (s->plus == 1 && s->pmz != 1))
-	{
-		i = ft_strlen(s->buf);
-		while (i > 0)
-		{
-			s->buf[i] = s->buf[i - 1];
-			i--;
-		}
-		if (s->pmz == 1)
-		{
-			s->buf[i] = '-';
-			s->j = ft_strlen(s->buf) + 1;
-		}
-		else if (s->plus == 1 && s->pmz != 1)
-		{
-			s->buf[i] = '+';
-			s->j = ft_strlen(s->buf) + 1;
-		}
-	}
-}
-
-static 	char	*fill(int i, int n, t_spec *s)
-{
-	int num;
-
-	num = n;
-	if (ft_checkdzero(s, n) == 1)
-		return (s->buf);
-	// if (s->pmz == 1)
-	// 	s->buf[s->j++] = '-';
-	// else if (s->plus == 1)
-	// 	s->buf[s->j++] = '+';
-	while (i > 0)
-	{
-		s->buf[s->j++] = n / i + '0';
-		n = n % i;
-		i = i / 10;
-	}
-	s->buf[s->j] = '\0';
-	if (s->width != 0 && (s->acc == 0 || s->acc == -1))
-		ft_dmoveonestep(s);
-	return (s->buf);
-}
-
-char		*ft_itoa(int n, t_spec *s)
-{
-	unsigned int	i;
-	int				count;
-
-	if (n == -2147483648)
-		s->buf = ft_strdup("-2147483648");
-	else
-	{
-		count = 0;
-		if (s->pmz == 1)
-			n = -n;
-		i = 1;
-		while (n / i > 9)
-		{
-			i = i * 10;
-			count++;
-		}
-		fill(i, n, s);
-	}
-	return (s->buf);
-}
 
 static	int	space_free(const char *str)
 {
