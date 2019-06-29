@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_record1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tlynesse <tlynesse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 15:54:21 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/06/28 18:54:52 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/06/29 15:08:21 by tlynesse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	ft_s_record(t_ran *ran, va_list *vl, t_spec *s)
 	ft_bufjoin_s(ran, s);
 }
 
-void	ft_p_record(char *str, t_ran *ran, t_spec *s)
+void	ft_pc_record(char *str, t_ran *ran, t_spec *s)
 {
 	ft_procwidth(str, ran, s);
 	if (s->minus == 1)
@@ -72,6 +72,16 @@ void	ft_p_record(char *str, t_ran *ran, t_spec *s)
 		s->width--;
 	}
 	ran->buf[ran->j++] = str[ran->i];
+}
+
+void	ft_p_record(t_ran *ran, va_list *vl, t_spec *s)
+{
+	unsigned long long int	num;
+	int						sl;
+
+	sl = 32;
+	num = va_arg(*vl, unsigned long long int);
+	ft_uli(s, ran, num, sl);
 }
 
 void	ft_d_record(t_ran *ran, va_list *vl, t_spec *s)

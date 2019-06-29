@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_supprint2x.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tlynesse <tlynesse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 00:41:22 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/06/26 22:28:17 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/06/29 15:03:46 by tlynesse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,12 +102,14 @@ void	ft_print1(t_ran *ran, t_spec *s)
 void	ft_bufjoin_x(t_ran *ran, t_spec *s)
 {
 	s->i = 0;
-	if (s->width == 0 && s->acc == 0)
+	if (ran->conver == 'p')
+		ft_print5(ran, s);
+	else if (s->width == 0 && s->acc == 0)
 		ft_print1(ran, s);
-	if (s->width != 0 && s->acc == 0)
+	else if (s->width != 0 && s->acc == 0)
 		ft_print2(ran, s);
-	if (s->width == 0 && s->acc != 0)
+	else if (s->width == 0 && s->acc != 0)
 		ft_print3(ran, s);
-	if (s->width != 0 && s->acc != 0)
+	else
 		ft_print4(ran, s);
 }

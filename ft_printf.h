@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tlynesse <tlynesse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/14 11:50:19 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/06/28 18:54:12 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/06/29 15:08:20 by tlynesse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ int     printf(const char *restrict format, ...);
 void	ft_procwidth(char *str, t_ran *ran, t_spec *s);
 void	ft_recconver(char *str, t_ran *ran, va_list *vl, t_spec *s);
 
-void	ft_p_record(char *str, t_ran *ran, t_spec *s);
+void	ft_pc_record(char *str, t_ran *ran, t_spec *s);
+void	ft_p_record(t_ran *ran, va_list *vl, t_spec *s);
 void	ft_c_record(t_ran *ran, va_list *vl, t_spec *s);
 void	ft_s_record(t_ran *ran, va_list *vl, t_spec *s);
 void	ft_bufjoin_s(t_ran *ran, t_spec *s);
@@ -115,7 +116,7 @@ void	ft_print4grid(t_ran *ran, t_spec *s);
 void	ft_checkgrid(t_ran *ran, t_spec *s);
 void	ft_checkgridplus2(t_ran *ran, t_spec *s);
 int		ft_biggeraccornum(t_spec *s);
-
+void	ft_print5(t_ran *ran, t_spec *s);
 
 int		ft_strlen(char *str);
 void	ft_newstruct(t_spec *s);
