@@ -6,7 +6,7 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/14 11:50:19 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/06/27 22:56:24 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/06/28 18:54:12 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_spec
 	int		i;
 	int		j;
 	int		z; // use for void	ft_acc(char *str, t_ran *ran, t_spec *spec) Problems with norm;
+			// z  - используется в %d как если подаваемое число равно нулю
 	int		strl; //length of the str %s and %d
 } t_spec;
 

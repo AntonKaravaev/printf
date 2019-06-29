@@ -6,7 +6,7 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 19:50:48 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/06/27 22:56:20 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/06/29 14:37:02 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,11 @@ int		ft_printf(const char *restrict str, ...)
 // int		main(void)
 // {
 //
-// 	ft_printf("%-5d\n", -42);
-// 	printf("%-5d\n", -42);
+// 	// ft_printf("%+4.15d\n", 422222);
+// 	// printf("%+4.15d\n", 422222);
+//
+// 	ft_printf("%+7d\n", 0);
+// 	printf("%+7d\n", 0);
 //
 // 	return (0);
 // }

@@ -6,7 +6,7 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 15:54:21 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/06/27 22:07:35 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/06/28 18:54:52 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	ft_d_record(t_ran *ran, va_list *vl, t_spec *s)
 	s->j = 0;
 	num = va_arg(*vl, long long int);
 	if (num == 0)
-	{
+	{	s->z = 1; // показывает, что наше число ноль
 		if (s->plus == 1)
 		{
 			s->buf[0] = '+';

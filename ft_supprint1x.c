@@ -6,7 +6,7 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 00:05:26 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/06/26 22:28:32 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/06/28 19:18:54 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	ft_print4_3(t_ran *ran, t_spec *s)
 			ran->buf[ran->j++] = ' ';
 		return ;
 	}
-	while (s->i < s->width - ft_biggeraccornum(s))
+	while (s->acc-- - ft_strlen(s->buf))
 	{
 		ran->buf[ran->j++] = '0';
 		s->i++;
@@ -97,7 +97,7 @@ void	ft_print4_5(t_ran *ran, t_spec *s)
 		ft_print4grid(ran, s);
 		return ;
 	}
-	while (ran->j < s->width - ft_biggeraccornum(s))
+	while (s->i < s->width - ft_biggeraccornum(s))
 	{
 		ran->buf[ran->j++] = ' ';
 		s->i++;

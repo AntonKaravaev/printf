@@ -6,7 +6,7 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 22:04:07 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/06/27 22:05:56 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/06/28 18:17:18 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ void	ft_dsi(t_spec *s, t_ran *ran, short int num)
 void	ft_dc(t_spec *s, t_ran *ran, char num)
 {
 	char	remainder;
-
 	ft_dcexeption(s, &num);
 	while (num != 0)
 	{
