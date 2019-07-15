@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_record1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlynesse <tlynesse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 15:54:21 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/06/29 15:08:21 by tlynesse         ###   ########.fr       */
+/*   Updated: 2019/07/14 15:55:45 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,35 +53,38 @@ void	ft_s_record(t_ran *ran, va_list *vl, t_spec *s)
 	ft_bufjoin_s(ran, s);
 }
 
-void	ft_pc_record(char *str, t_ran *ran, t_spec *s)
+void	ft_adr_record(t_ran *ran, va_list *vl, t_spec *s)
 {
-	ft_procwidth(str, ran, s);
+	unsigned long num;
+
+	num = va_arg(*vl, unsigned long);
+	if (num == 0)
+		ft_supoctalsminus(s, ran);
+	else
+		ft_supadr1(s, ran, num);
+}
+
+void	ft_p_record(char *str, t_ran *ran, t_spec *s)
+{
+	char c;
+
+	c = ' ';
+	while (str[ran->i] != ran->conver)
+		ran->i++;
 	if (s->minus == 1)
 	{
 		ran->buf[ran->j++] = str[ran->i];
-		while (s->width > 1)
-		{
+		while (s->width-- > 1)
 			ran->buf[ran->j++] = ' ';
-			s->width--;
-		}
-		return ;
 	}
-	while (s->width > 1)
+	else
 	{
-		ran->buf[ran->j++] = ' ';
-		s->width--;
+		if (s->zero == 1)
+			c = '0';
+		while (s->width-- > 1)
+			ran->buf[ran->j++] = c;
+		ran->buf[ran->j++] = str[ran->i];
 	}
-	ran->buf[ran->j++] = str[ran->i];
-}
-
-void	ft_p_record(t_ran *ran, va_list *vl, t_spec *s)
-{
-	unsigned long long int	num;
-	int						sl;
-
-	sl = 32;
-	num = va_arg(*vl, unsigned long long int);
-	ft_uli(s, ran, num, sl);
 }
 
 void	ft_d_record(t_ran *ran, va_list *vl, t_spec *s)
@@ -93,24 +96,14 @@ void	ft_d_record(t_ran *ran, va_list *vl, t_spec *s)
 	s->j = 0;
 	num = va_arg(*vl, long long int);
 	if (num == 0)
-	{	s->z = 1; // показывает, что наше число ноль
-		if (s->plus == 1)
-		{
-			s->buf[0] = '+';
-			s->buf[1] = 48;
-		}
-		else
-			s->buf[0] = 48;
-		ft_bufjoin_d(ran, s);
-		return ;
-	}
-	if (s->flag == 0)
+		ft_dsupzero(ran, s);
+	else if (s->flag == 0)
 		ft_di(s, ran, (int)num);
 	else if (s->flag == 1)
 		ft_dsi(s, ran, (short int)num);
 	else if (s->flag == 2)
 		ft_dc(s, ran, (char)num);
-	else if (s->flag == 3)
+	else if (s->flag == 3 || s->flag == 6)
 		ft_dli(s, ran, (long int)num);
 	else
 		ft_dlli(s, ran, (long long int)num);

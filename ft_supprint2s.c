@@ -6,7 +6,7 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 15:45:28 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/06/27 15:52:58 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/07/13 16:31:03 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,9 @@ void	ft_sprint4_3(t_ran *ran, t_spec *s)
 	}
 	if (s->strl <= s->acc)
 	{
-		while (s->j < s->strl)
+		while (s->width-- > s->strl)
+			ran->buf[ran->j++] = ' ';
+		while (s->buf[s->j])
 			ran->buf[ran->j++] = s->buf[s->j++];
 	}
 	else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_recconver.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlynesse <tlynesse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/14 12:00:40 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/06/29 15:09:15 by tlynesse         ###   ########.fr       */
+/*   Updated: 2019/07/14 15:30:52 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,33 @@
 
 void	ft_flag(char *str, t_ran *ran, t_spec *s)
 {
-	while (str[ran->i] != ran->conver)
+	ran->i--;
+	while (str[++ran->i] != ran->conver)
 	{
 		if (str[ran->i] == 'h')
 		{
-			ran->i++;
 			s->flag = 1;
-			if (str[ran->i] == 'h')
+			if (str[++ran->i] == 'h')
 				s->flag = 2;
 			return ;
 		}
-		if (str[ran->i] == 'l')
+		else if (str[ran->i] == 'l')
 		{
-			ran->i++;
 			s->flag = 3;
-			if (str[ran->i] == 'l')
+			if (str[++ran->i] == 'l')
 				s->flag = 4;
 			return ;
 		}
-		ran->i++;
+		else if (ft_flagsup(str, ran, s) == 1)
+			return ;
 	}
 }
 
 void	ft_acc(char *str, t_ran *ran, t_spec *s)
 {
 	while (str[ran->i] != ran->conver && str[ran->i] != 'h'
-		&& str[ran->i] != 'l')
+		&& str[ran->i] != 'l' && str[ran->i] != 'L'
+		&& str[ran->i] && str[ran->i] != 'j' && str[ran->i] != 'z')
 	{
 		if (str[ran->i] == '.')
 		{
@@ -69,7 +70,8 @@ void	ft_width(char *str, t_ran *ran, t_spec *s)
 	int z;
 
 	while (str[ran->i] != ran->conver && str[ran->i] != '.'
-		&& str[ran->i] != 'h' && str[ran->i] != 'l')
+		&& str[ran->i] != 'h' && str[ran->i] != 'l' && str[ran->i] != 'L'
+		&& str[ran->i] != 'j' && str[ran->i] != 'z')
 	{
 		if (str[ran->i] >= '1' && str[ran->i] <= '9')
 		{
@@ -92,9 +94,17 @@ void	ft_whilenotconver(char *str, t_ran *ran, t_spec *s)
 		ft_reworkbuf(s);
 		ft_acc(str, ran, s);
 		ft_reworkbuf(s);
-		ft_flag(str, ran, s);
+		if (ran->conver != 'f')
+			ft_flag(str, ran, s);
+		else
+			ft_flagf(str, ran, s);
 		while (str[ran->i] != ran->conver)
 			ran->i++;
+	}
+	else
+	{
+		ft_width(str, ran, s);
+		ft_reworkbuf(s);
 	}
 }
 
@@ -102,23 +112,23 @@ void	ft_recconver(char *str, t_ran *ran, va_list *vl, t_spec *s)
 {
 	ft_whilenotconver(str, ran, s);
 	if (ran->conver == '%')
-		ft_pc_record(str, ran, s);
-	if (ran->conver == 'c')
+		ft_p_record(str, ran, s);
+	else if (ran->conver == 'c')
 		ft_c_record(ran, vl, s);
-	if (ran->conver == 's')
+	else if (ran->conver == 's')
 		ft_s_record(ran, vl, s);
-	if (ran->conver == 'p')
-		ft_p_record(ran, vl, s);
-	if (ran->conver == 'd' || ran->conver == 'i')
+	else if (ran->conver == 'p')
+		ft_adr_record(ran, vl, s);
+	else if (ran->conver == 'd' || ran->conver == 'i')
 		ft_d_record(ran, vl, s);
-	// if (ran->conver == 'o')
-	// 	ft_o_record(str, ran, vl, s;
-	// if (ran->conver == 'u')
-		// ft_u_record(str, ran, vl, s);
-	if (ran->conver == 'x')
+	else if (ran->conver == 'o')
+		ft_o_record(ran, vl, s);
+	else if (ran->conver == 'u' || ran->conver == 'U')
+		ft_u_record(ran, vl, s);
+	else if (ran->conver == 'x')
 		ft_x_record(ran, vl, s);
-	if (ran->conver == 'X')
-		ft_X_record(ran, vl, s);
-	// if (ran->conver == 'f')
-	// 	ft_f_record(str, ran, vl, s);
+	else if (ran->conver == 'X')
+		ft_xbig_record(ran, vl, s);
+	if (ran->conver == 'f')
+		ft_f_record(ran, vl, s);
 }

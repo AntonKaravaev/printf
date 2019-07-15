@@ -6,7 +6,7 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 21:28:26 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/06/25 22:50:42 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/07/14 15:30:54 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,19 @@ void	ft_bzero(void *s, size_t size)
 	}
 }
 
-char	*ft_strcpy(char *dest, const char *src)
+int		ft_flagsup(char *str, t_ran *ran, t_spec *s)
 {
-	char	*save;
-
-	save = dest;
-	while (*src)
+	if (str[ran->i] == 'j')
 	{
-		*dest = *src;
-		dest++;
-		src++;
+		ran->i++;
+		s->flag = 5;
+		return (1);
 	}
-	*dest = *src;
-	return (save);
+	else if (str[ran->i] == 'z')
+	{
+		ran->i++;
+		s->flag = 6;
+		return (1);
+	}
+	return (0);
 }

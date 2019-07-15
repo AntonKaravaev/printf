@@ -1,27 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_convertdigits.c                                 :+:      :+:    :+:   */
+/*   ft_convertoctal.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/27 22:04:07 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/07/09 20:26:27 by crenly-b         ###   ########.fr       */
+/*   Created: 2019/07/10 17:24:33 by crenly-b          #+#    #+#             */
+/*   Updated: 2019/07/14 15:33:31 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_di(t_spec *s, t_ran *ran, int num)
+void	ft_oi(t_spec *s, t_ran *ran, unsigned int num)
 {
-	int	remainder;
+	unsigned int	remainder;
 
-	ft_diexeption(s, &num);
 	while (num != 0)
 	{
-		remainder = num % 10;
+		remainder = num % 8;
 		s->buf[s->j++] = 48 + remainder;
-		num = num / 10;
+		num = num / 8;
+	}
+	if (s->grid == 1)
+		s->buf[s->j++] = '0';
+	s->j--;
+	while (s->i < s->j)
+	{
+		remainder = s->buf[s->i];
+		s->buf[s->i++] = s->buf[s->j];
+		s->buf[s->j--] = remainder;
+	}
+	ft_bufjoin_d(ran, s);
+}
+
+void	ft_osi(t_spec *s, t_ran *ran, unsigned short int num)
+{
+	unsigned short int	remainder;
+
+	while (num != 0)
+	{
+		remainder = num % 8;
+		s->buf[s->j++] = 48 + remainder;
+		num = num / 8;
 	}
 	s->j--;
 	while (s->i < s->j)
@@ -33,16 +54,15 @@ void	ft_di(t_spec *s, t_ran *ran, int num)
 	ft_bufjoin_d(ran, s);
 }
 
-void	ft_dsi(t_spec *s, t_ran *ran, short int num)
+void	ft_oc(t_spec *s, t_ran *ran, unsigned char num)
 {
-	short int	remainder;
+	unsigned char	remainder;
 
-	ft_dsiexeption(s, &num);
 	while (num != 0)
 	{
-		remainder = num % 10;
+		remainder = num % 8;
 		s->buf[s->j++] = 48 + remainder;
-		num = num / 10;
+		num = num / 8;
 	}
 	s->j--;
 	while (s->i < s->j)
@@ -54,16 +74,15 @@ void	ft_dsi(t_spec *s, t_ran *ran, short int num)
 	ft_bufjoin_d(ran, s);
 }
 
-void	ft_dc(t_spec *s, t_ran *ran, char num)
+void	ft_oli(t_spec *s, t_ran *ran, unsigned long int num)
 {
-	char	remainder;
+	unsigned long int	remainder;
 
-	ft_dcexeption(s, &num);
 	while (num != 0)
 	{
-		remainder = num % 10;
+		remainder = num % 8;
 		s->buf[s->j++] = 48 + remainder;
-		num = num / 10;
+		num = num / 8;
 	}
 	s->j--;
 	while (s->i < s->j)
@@ -75,48 +94,18 @@ void	ft_dc(t_spec *s, t_ran *ran, char num)
 	ft_bufjoin_d(ran, s);
 }
 
-void	ft_dli(t_spec *s, t_ran *ran, long int num)
+void	ft_olli(t_spec *s, t_ran *ran, unsigned long long int num)
 {
-	long int	remainder;
+	unsigned long long int remainder;
 
-	ft_dliexeption(s, &num);
-	if (num < 0)
-	{
-		s->pmz = -1;
-		num = num * (-1);
-	}
 	while (num != 0)
 	{
-		remainder = num % 10;
+		remainder = num % 8;
 		s->buf[s->j++] = 48 + remainder;
-		num = num / 10;
+		num = num / 8;
 	}
-	s->j--;
-	while (s->i < s->j)
-	{
-		remainder = s->buf[s->i];
-		s->buf[s->i++] = s->buf[s->j];
-		s->buf[s->j--] = remainder;
-	}
-	ft_bufjoin_d(ran, s);
-}
-
-void	ft_dlli(t_spec *s, t_ran *ran, long long int num)
-{
-	long long int remainder;
-
-	ft_dllexeption(s, &num);
-	if (num < 0)
-	{
-		s->pmz = -1;
-		num = num * (-1);
-	}
-	while (num != 0)
-	{
-		remainder = num % 10;
-		s->buf[s->j++] = 48 + remainder;
-		num = num / 10;
-	}
+	if (s->grid == 1)
+		s->buf[s->j++] = '0';
 	s->j--;
 	while (s->i < s->j)
 	{

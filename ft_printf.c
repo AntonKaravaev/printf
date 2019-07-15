@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlynesse <tlynesse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 19:50:48 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/06/29 15:13:49 by tlynesse         ###   ########.fr       */
+/*   Updated: 2019/07/14 18:00:54 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int		ft_checcon(char *str, int j, t_spec *s, t_ran *ran)
 	ft_easyflag(str, s, j);
 	while (str[j] != '\0' && str[j] != '%' && str[j] != 'c' && str[j] != 's'
 		&& str[j] != 'p' && str[j] != 'd' && str[j] != 'i' && str[j] != 'o'
-		&& str[j] != 'u' && str[j] != 'x' && str[j] != 'X' && str[j] != 'f'
-		&& str[j] != '\n' && str[j] != '\t' && str[j] != '\v')
+		&& str[j] != 'u' && str[j] != 'U' && str[j] != 'x' && str[j] != 'X'
+		&& str[j] != 'f' && str[j] != '\n' && str[j] != '\t' && str[j] != '\v')
 		j++;
 	if (str[j] == '\n' || str[j] == '\t' || str[j] == '\v')
 	{
@@ -27,7 +27,7 @@ int		ft_checcon(char *str, int j, t_spec *s, t_ran *ran)
 	}
 	if (str[j] == '%' || str[j] == 'c' || str[j] == 's' || str[j] == 'p'
 		|| str[j] == 'd' || str[j] == 'i' || str[j] == 'o' || str[j] == 'u'
-		|| str[j] == 'x' || str[j] == 'X' || str[j] == 'f')
+		|| str[j] == 'U' || str[j] == 'x' || str[j] == 'X' || str[j] == 'f')
 	{
 		ran->conver = str[j];
 		return (0);
@@ -95,7 +95,7 @@ int		ft_printf(const char *restrict str, ...)
 	ran.ret = 0;
 	ran.fzero = 0;
 	ran.strlen = 0;
-	ran.bs = 1001;
+	ran.bs = 10001;
 	length = 0;
 	va_start(vl, str);
 	if (!(ran.buf = (char *)malloc(sizeof(char) * ran.bs)))
@@ -108,13 +108,3 @@ int		ft_printf(const char *restrict str, ...)
 	va_end(vl);
 	return (length);
 }
-
-// int		main(void)
-// {
-// 	int a = 10;
-// 	printf("original_out => |%15p|\n", &a);
-// 	ft_printf("trash_out => |%15p|\n", &a);
-// 	printf("original_out => |%-15p|\n", &a);
-// 	ft_printf("trash_out => |%-15p|\n", &a);
-// 	return (0);
-// }

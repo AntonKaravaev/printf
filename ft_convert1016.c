@@ -6,13 +6,13 @@
 /*   By: crenly-b <crenly-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 21:39:09 by crenly-b          #+#    #+#             */
-/*   Updated: 2019/06/27 17:47:11 by crenly-b         ###   ########.fr       */
+/*   Updated: 2019/07/09 22:20:23 by crenly-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_ui(t_spec *s, t_ran *ran, unsigned long long int num,
+void	ft_xui(t_spec *s, t_ran *ran, unsigned long long int num,
 	int sm)
 {
 	unsigned int	remainder;
@@ -40,7 +40,7 @@ void	ft_ui(t_spec *s, t_ran *ran, unsigned long long int num,
 	ft_bufjoin_x(ran, s);
 }
 
-void	ft_usi(t_spec *s, t_ran *ran, unsigned long long int num,
+void	ft_xusi(t_spec *s, t_ran *ran, unsigned long long int num,
 	int sm)
 {
 	unsigned short int	remainder;
@@ -68,7 +68,7 @@ void	ft_usi(t_spec *s, t_ran *ran, unsigned long long int num,
 	ft_bufjoin_x(ran, s);
 }
 
-void	ft_ucc(t_spec *s, t_ran *ran, unsigned long long int num,
+void	ft_xucc(t_spec *s, t_ran *ran, unsigned long long int num,
 	int sm)
 {
 	unsigned char	remainder;
@@ -96,7 +96,7 @@ void	ft_ucc(t_spec *s, t_ran *ran, unsigned long long int num,
 	ft_bufjoin_x(ran, s);
 }
 
-void	ft_uli(t_spec *s, t_ran *ran, unsigned long long int num,
+void	ft_xuli(t_spec *s, t_ran *ran, unsigned long long int num,
 	int sm)
 {
 	unsigned long int	remainder;
@@ -124,7 +124,7 @@ void	ft_uli(t_spec *s, t_ran *ran, unsigned long long int num,
 	ft_bufjoin_x(ran, s);
 }
 
-void	ft_ulli(t_spec *s, t_ran *ran, unsigned long long int num,
+void	ft_xulli(t_spec *s, t_ran *ran, unsigned long long int num,
 	int sm)
 {
 	unsigned long long int	remainder;
